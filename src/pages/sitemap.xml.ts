@@ -17,6 +17,7 @@ export const GET: APIRoute = () => {
     { url: '/ramadan', priority: '0.8', changefreq: 'weekly'  },
     { url: '/about',   priority: '0.5', changefreq: 'monthly' },
     { url: '/privacy', priority: '0.5', changefreq: 'monthly' },
+    { url: '/terms',   priority: '0.5', changefreq: 'monthly' },
   ];
 
   const cityPages = cities.map(c => ({

@@ -1,0 +1,176 @@
+---
+import Base from '../layouts/Base.astro';
+import { u } from '../utils/url';
+
+const title = 'شروط الاستخدام — مواقيت الصلاة في الإمارات';
+const description = 'شروط استخدام موقع مواقيت الصلاة في الإمارات. الأوقات تقريبية للاسترشاد فقط. للتحقق الرسمي يُرجى الرجوع إلى الهيئة العامة للشؤون الإسلامية والأوقاف.';
+---
+
+<Base title={title} description={description} canonical="/terms" cityName="شروط الاستخدام">
+  <div class="max-w-3xl mx-auto px-4 py-8">
+    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1">شروط الاستخدام</h1>
+    <p class="text-gray-500 text-sm mb-6">آخر تحديث: مارس 2025 · يُرجى قراءة هذه الشروط قبل استخدام الموقع</p>
+
+    <div class="space-y-5 text-gray-700 text-sm leading-relaxed">
+
+      <!-- IMPORTANT DISCLAIMER -->
+      <div class="bg-amber-50 border-2 border-amber-400 rounded-2xl p-5">
+        <div class="flex items-start gap-3">
+          <div class="text-3xl flex-shrink-0">⚠️</div>
+          <div>
+            <h2 class="text-base font-bold text-amber-900 mb-2">تنبيه مهم — دقة أوقات الصلاة</h2>
+            <p class="text-amber-800 text-sm leading-relaxed">
+              الأوقات المعروضة في هذا الموقع <strong>محسوبة فلكياً</strong> وتُقدَّم للاسترشاد
+              والتوجيه العام. قد تختلف عن الأوقات الرسمية الصادرة عن
+              <strong>الهيئة العامة للشؤون الإسلامية والأوقاف</strong> بفارق دقيقة إلى دقيقتين.
+            </p>
+            <p class="text-amber-800 text-sm leading-relaxed mt-2">
+              <strong>في شهر رمضان المبارك</strong> وفيما يخص وقت الإفطار والسحور، يُنصح دائماً
+              بمراجعة الأوقات الرسمية من الجهات الدينية المختصة في إمارتك.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 1 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">1. القبول بالشروط</h2>
+        <p>
+          باستخدامك لموقع <strong>مواقيت الصلاة في الإمارات</strong>، فإنك توافق على
+          الالتزام بهذه الشروط والأحكام. إذا كنت لا توافق على أي جزء منها، يُرجى
+          التوقف عن استخدام الموقع.
+        </p>
+        <p class="mt-2">
+          يحق لنا تعديل هذه الشروط في أي وقت. سيُعدّ استمرارك في استخدام الموقع بعد
+          نشر أي تعديلات قبولاً ضمنياً بالشروط المُعدَّلة.
+        </p>
+      </div>
+
+      <!-- 2 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">2. طبيعة الخدمة والغرض منها</h2>
+        <p>
+          يُقدّم هذا الموقع خدمة إلكترونية مجانية لحساب وعرض مواقيت الصلاة الخمس
+          في مدن الإمارات العربية المتحدة، بناءً على الإحداثيات الجغرافية لكل مدينة
+          وطريقة <strong>رابطة العالم الإسلامي (MWL)</strong> للحساب الفلكي.
+        </p>
+        <p class="mt-2">
+          الموقع مُوجَّه للاسترشاد الشخصي، وليس بديلاً عن الأذان الرسمي أو الأوقات
+          المعتمدة من الجهات الدينية في الإمارات.
+        </p>
+      </div>
+
+      <!-- 3 — DETAILED DISCLAIMER -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">3. إخلاء المسؤولية عن دقة الأوقات</h2>
+        <div class="space-y-3">
+          <p>
+            تُحسَب أوقات الصلاة المعروضة بخوارزميات فلكية معتمدة، غير أن عدة عوامل قد
+            تُحدث فارقاً بين الأوقات المعروضة والأوقات الرسمية المحلية:
+          </p>
+          <ul class="space-y-1.5 list-disc list-inside text-gray-600">
+            <li>اختلاف طريقة الحساب المعتمدة من جهة إلى أخرى</li>
+            <li>تحقق رؤية الهلال في بعض المناسبات</li>
+            <li>تعديلات إدارية تُجريها وزارة الشؤون الإسلامية والأوقاف</li>
+            <li>تقريب الدقيقة لأسفل أو لأعلى في بعض الحسابات</li>
+          </ul>
+          <div class="bg-gray-50 rounded-xl p-3 text-xs text-gray-600">
+            <p class="font-semibold mb-1">الجهات الرسمية للمرجعية في الإمارات:</p>
+            <ul class="space-y-0.5 list-disc list-inside">
+              <li>الهيئة العامة للشؤون الإسلامية والأوقاف — <strong>awqaf.gov.ae</strong></li>
+              <li>دائرة الشؤون الإسلامية والعمل الخيري – دبي — <strong>iacad.gov.ae</strong></li>
+              <li>تطبيق أذان وزارة الشؤون الإسلامية الإماراتية</li>
+            </ul>
+          </div>
+          <p>
+            <strong>لا يتحمل مشغّلو هذا الموقع أي مسؤولية</strong> عن أي أثر ديني أو
+            قانوني ناتج عن الاعتماد الحصري على الأوقات المعروضة هنا دون التحقق
+            من المصادر الرسمية.
+          </p>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">4. الاستخدام المقبول</h2>
+        <p class="mb-2">يُسمح باستخدام الموقع للأغراض الشخصية وغير التجارية. يُحظر:</p>
+        <ul class="space-y-1 list-disc list-inside text-gray-600">
+          <li>استخدام الموقع لأي غرض غير مشروع أو مخالف لقوانين الإمارات</li>
+          <li>محاولة اختراق أو تعطيل أنظمة الموقع</li>
+          <li>نشر أوقات الصلاة المأخوذة من هذا الموقع على أنها أوقات رسمية صادرة عن جهة دينية معتمدة</li>
+          <li>إعادة استخدام المحتوى لأغراض تجارية دون إذن كتابي مسبق</li>
+        </ul>
+      </div>
+
+      <!-- 5 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">5. الملكية الفكرية</h2>
+        <p>
+          جميع محتويات الموقع — بما فيها الكود البرمجي والتصميم والنصوص — محمية بموجب
+          قوانين الملكية الفكرية المعمول بها. يُسمح بمشاركة روابط الصفحات للاستخدام
+          الشخصي. يُحظر نسخ المحتوى أو إعادة نشره لأغراض تجارية.
+        </p>
+        <p class="mt-2 text-gray-600 text-xs">
+          خوارزمية حساب الأوقات مستندة إلى مشروع PrayTimes مفتوح المصدر (praytimes.org)
+          بموجب ترخيص LGPL.
+        </p>
+      </div>
+
+      <!-- 6 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">6. حدود المسؤولية</h2>
+        <p>
+          يُقدَّم الموقع <strong>"كما هو" (As Is)</strong> بدون أي ضمانات صريحة أو ضمنية.
+          لا يضمن مشغّل الموقع:
+        </p>
+        <ul class="mt-2 space-y-1 list-disc list-inside text-gray-600">
+          <li>استمرارية الخدمة أو خلوّها من الأخطاء التقنية</li>
+          <li>دقة الأوقات المطلقة بدون أي فارق عن الأوقات الرسمية</li>
+          <li>توافق الموقع مع جميع الأجهزة والمتصفحات</li>
+        </ul>
+        <p class="mt-2">
+          لا يكون مشغّل الموقع مسؤولاً عن أي أضرار مباشرة أو غير مباشرة تنشأ عن
+          استخدام الموقع أو الاعتماد على المعلومات الواردة فيه.
+        </p>
+      </div>
+
+      <!-- 7 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">7. الانقطاع في الخدمة</h2>
+        <p>
+          نسعى إلى توفير الخدمة باستمرار، غير أننا لا نضمن ذلك. قد يتعرض الموقع
+          للتوقف المؤقت بسبب الصيانة أو أعطال تقنية أو قرارات تتعلق بمنصة الاستضافة.
+          لن يكون مشغّل الموقع مسؤولاً عن أي خسارة ناجمة عن توقف الخدمة.
+        </p>
+      </div>
+
+      <!-- 8 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">8. القانون المطبَّق والاختصاص القضائي</h2>
+        <p>
+          تخضع هذه الشروط وتُفسَّر وفقاً لقوانين <strong>الإمارات العربية المتحدة</strong>.
+          تختص محاكم الإمارات بالنظر في أي نزاع ينشأ عن استخدام هذا الموقع.
+        </p>
+      </div>
+
+      <!-- 9 -->
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">9. اللغة الرسمية</h2>
+        <p>
+          النسخة العربية من هذه الشروط هي النسخة الرسمية المعتمدة. في حال وجود أي
+          تعارض بين النسخة العربية وأي ترجمة أخرى، تسود النسخة العربية.
+        </p>
+      </div>
+
+      <!-- Nav -->
+      <div class="flex flex-wrap justify-center gap-4 text-sm text-gray-500 pt-2">
+        <a href={u('privacy')} class="text-primary-600 hover:underline">سياسة الخصوصية</a>
+        <span>·</span>
+        <a href={u('about')} class="text-primary-600 hover:underline">عن الموقع</a>
+        <span>·</span>
+        <a href={u('')} class="text-primary-600 hover:underline">← الرئيسية</a>
+      </div>
+
+    </div>
+  </div>
+</Base>
