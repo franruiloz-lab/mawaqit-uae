@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#065f46"/>
+      <stop offset="100%" style="stop-color:#047857"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <!-- Decorative arcs -->
+  <circle cx="1100" cy="80" r="200" fill="none" stroke="#ffffff" stroke-opacity="0.08" stroke-width="60"/>
+  <circle cx="100" cy="560" r="180" fill="none" stroke="#ffffff" stroke-opacity="0.06" stroke-width="50"/>
+  <!-- Mosque icon (simplified) -->
+  <text x="600" y="200" font-family="serif" font-size="120" text-anchor="middle" fill="#ffffff" opacity="0.9">🕌</text>
+  <!-- Main title -->
+  <text x="600" y="310" font-family="'Noto Naskh Arabic', 'Arial', sans-serif" font-size="64" font-weight="bold" text-anchor="middle" fill="#ffffff" direction="rtl">مواقيت الصلاة في الإمارات</text>
+  <!-- Subtitle -->
+  <text x="600" y="385" font-family="'Noto Naskh Arabic', 'Arial', sans-serif" font-size="34" text-anchor="middle" fill="#a7f3d0" direction="rtl">أوقات الصلاة الخمس · جميع المدن</text>
+  <!-- Cities row -->
+  <text x="600" y="460" font-family="'Noto Naskh Arabic', 'Arial', sans-serif" font-size="26" text-anchor="middle" fill="#6ee7b7" direction="rtl">دبي · أبوظبي · الشارقة · عجمان · رأس الخيمة · الفجيرة</text>
+  <!-- Bottom bar -->
+  <rect x="0" y="560" width="1200" height="70" fill="#000000" fill-opacity="0.25"/>
+  <text x="600" y="605" font-family="'Arial', sans-serif" font-size="24" text-anchor="middle" fill="#d1fae5">mawaqit-uae.com · طريقة رابطة العالم الإسلامي</text>
+</svg>

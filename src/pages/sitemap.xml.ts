@@ -2,13 +2,21 @@ import type { APIRoute } from 'astro';
 import { cities } from '../data/cities';
 
 export const GET: APIRoute = () => {
-  const baseUrl = 'https://mawaqit-uae.com';
+  // Build the canonical base URL from Astro config (single source of truth).
+  // When you switch to a custom domain, update astro.config.mjs and this
+  // file will automatically use the new URL.
+  const site = import.meta.env.SITE.replace(/\/$/, '');      // e.g. https://franruiloz-lab.github.io
+  const base = import.meta.env.BASE_URL.replace(/\/$/, '');  // e.g. /mawaqit-uae
+  const baseUrl = `${site}${base}`;                           // e.g. https://franruiloz-lab.github.io/mawaqit-uae
+
   const today = new Date().toISOString().split('T')[0];
 
   const staticPages = [
-    { url: '/', priority: '1.0', changefreq: 'daily' },
-    { url: '/maghrib', priority: '0.9', changefreq: 'daily' },
-    { url: '/ramadan', priority: '0.8', changefreq: 'weekly' },
+    { url: '/',        priority: '1.0', changefreq: 'daily'   },
+    { url: '/maghrib', priority: '0.9', changefreq: 'daily'   },
+    { url: '/ramadan', priority: '0.8', changefreq: 'weekly'  },
+    { url: '/about',   priority: '0.5', changefreq: 'monthly' },
+    { url: '/privacy', priority: '0.5', changefreq: 'monthly' },
   ];
 
   const cityPages = cities.map(c => ({
