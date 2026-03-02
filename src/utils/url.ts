@@ -6,12 +6,13 @@
  * Usage in scripts:    window.location.href = BASE + 'dubai';
  */
 
-const _base = import.meta.env.BASE_URL; // "/" or "/mawaqit-uae/"
+// Normalize: always ends with "/"
+const _base = import.meta.env.BASE_URL.replace(/\/?$/, '/'); // e.g. "/mawaqit-uae/"
 
 /** Returns a site-relative URL with the base prefix */
 export function u(path: string): string {
   if (!path || path === '/') return _base;
-  const clean = path.startsWith('/') ? path.slice(1) : path;
+  const clean = path.replace(/^\/+/, ''); // strip leading slashes
   return `${_base}${clean}`;
 }
 

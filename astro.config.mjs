@@ -9,6 +9,6 @@ export default defineConfig({
   site: isGitHubActions
     ? 'https://franruiloz-lab.github.io'
     : 'http://localhost:4321',
-  base: isGitHubActions ? '/mawaqit-uae' : '/',
+  base: isGitHubActions ? '/mawaqit-uae/' : '/',
   integrations: [tailwind()],
 });
