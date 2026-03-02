@@ -20,5 +20,5 @@
   <text x="600" y="460" font-family="'Noto Naskh Arabic', 'Arial', sans-serif" font-size="26" text-anchor="middle" fill="#6ee7b7" direction="rtl">دبي · أبوظبي · الشارقة · عجمان · رأس الخيمة · الفجيرة</text>
   <!-- Bottom bar -->
   <rect x="0" y="560" width="1200" height="70" fill="#000000" fill-opacity="0.25"/>
-  <text x="600" y="605" font-family="'Arial', sans-serif" font-size="24" text-anchor="middle" fill="#d1fae5">mawaqit-uae.com · طريقة رابطة العالم الإسلامي</text>
+  <text x="600" y="605" font-family="'Arial', sans-serif" font-size="24" text-anchor="middle" fill="#d1fae5">timeofpray.net · طريقة رابطة العالم الإسلامي</text>
 </svg>

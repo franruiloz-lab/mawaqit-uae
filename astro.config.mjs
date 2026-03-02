@@ -3,7 +3,7 @@ import tailwind from '@astrojs/tailwind';
 
 // Custom domain active — update CNAME file and this site if domain changes
 export default defineConfig({
-  site: 'https://mawaqit-uae.com',
+  site: 'https://timeofpray.net',
   base: '/',
   integrations: [tailwind()],
 });

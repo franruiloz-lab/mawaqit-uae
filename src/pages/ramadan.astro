@@ -20,8 +20,8 @@ const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
-    { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: 'https://franruiloz-lab.github.io/mawaqit-uae/' },
-    { '@type': 'ListItem', position: 2, name: 'رمضان 2025', item: 'https://franruiloz-lab.github.io/mawaqit-uae/ramadan' },
+    { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: import.meta.env.SITE },
+    { '@type': 'ListItem', position: 2, name: 'رمضان 2025', item: `${import.meta.env.SITE}ramadan` },
   ],
 };
 

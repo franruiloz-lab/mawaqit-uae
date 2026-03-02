@@ -26,7 +26,7 @@ const dayName = arabicDays[now.getDay()];
 const title = `موعد اذان المغرب في ${city.nameAr} اليوم ${now.getDate()} ${monthName} | مواقيت الصلاة`;
 const description = `موعد اذان المغرب في ${city.nameAr} اليوم ${dayName} ${now.getDate()} ${monthName} ${now.getFullYear()}: المغرب ${formatTimeAr(todayTimes.maghrib)} · الفجر ${formatTimeAr(todayTimes.fajr)} · الظهر ${formatTimeAr(todayTimes.dhuhr)} · العصر ${formatTimeAr(todayTimes.asr)} · العشاء ${formatTimeAr(todayTimes.isha)}. جدول مواقيت الصلاة الشهري في ${city.nameAr}.`;
 
-const siteBase = 'https://franruiloz-lab.github.io/mawaqit-uae';
+const siteBase = import.meta.env.SITE.replace(/\/$/, '');
 
 const breadcrumbSchema = {
   '@context': 'https://schema.org',

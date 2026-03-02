@@ -14,10 +14,10 @@ interface Props {
 
 const { title, description, canonical, cityName, cityId, schema } = Astro.props;
 
-// Single source of truth: update astro.config.mjs when switching to custom domain
-const _site = import.meta.env.SITE.replace(/\/$/, '');       // https://franruiloz-lab.github.io
-const _base = import.meta.env.BASE_URL.replace(/\/$/, '');   // /mawaqit-uae
-const siteUrl = `${_site}${_base}`;                          // https://franruiloz-lab.github.io/mawaqit-uae
+// Single source of truth: update astro.config.mjs when switching domain
+const _site = import.meta.env.SITE.replace(/\/$/, '');       // https://timeofpray.net
+const _base = import.meta.env.BASE_URL.replace(/\/$/, '');   // '' (base='/')
+const siteUrl = `${_site}${_base}`;                          // https://timeofpray.net
 const canonicalUrl = canonical
   ? `${siteUrl}${canonical}`
   : `${siteUrl}${Astro.url.pathname}`;
