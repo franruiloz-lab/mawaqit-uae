@@ -1,14 +1,9 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
-// GitHub Pages URL: https://franruiloz-lab.github.io/mawaqit-uae/
-// When you buy the domain, remove `base` and update `site`.
-const isGitHubActions = process.env.GITHUB_ACTIONS === 'true';
-
+// Custom domain active — update CNAME file and this site if domain changes
 export default defineConfig({
-  site: isGitHubActions
-    ? 'https://franruiloz-lab.github.io'
-    : 'http://localhost:4321',
-  base: isGitHubActions ? '/mawaqit-uae/' : '/',
+  site: 'https://mawaqit-uae.com',
+  base: '/',
   integrations: [tailwind()],
 });
