@@ -1,0 +1,57 @@
+---
+interface Props {
+  lat: number;
+  lng: number;
+  cityNameAr: string;
+}
+const { lat, lng, cityNameAr } = Astro.props;
+
+// Calculate Qibla direction (server-side)
+// Mecca: 21.3891, 39.8579
+const meccaLat = 21.3891 * Math.PI / 180;
+const meccaLng = 39.8579 * Math.PI / 180;
+const cityLatR = lat * Math.PI / 180;
+const cityLngR = lng * Math.PI / 180;
+const dLng = meccaLng - cityLngR;
+const y = Math.sin(dLng) * Math.cos(meccaLat);
+const x = Math.cos(cityLatR) * Math.sin(meccaLat) - Math.sin(cityLatR) * Math.cos(meccaLat) * Math.cos(dLng);
+let qibla = Math.atan2(y, x) * 180 / Math.PI;
+if (qibla < 0) qibla += 360;
+const qiblaRounded = Math.round(qibla);
+---
+
+<div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+  <h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
+    <span class="text-xl">🧭</span>
+    اتجاه القبلة من {cityNameAr}
+  </h3>
+  <div class="flex items-center gap-4">
+    <div class="relative w-20 h-20 flex-shrink-0">
+      <!-- Compass -->
+      <div class="w-20 h-20 rounded-full border-4 border-gray-200 bg-gray-50 flex items-center justify-center relative overflow-hidden">
+        <div
+          class="absolute w-1 bg-primary-600 rounded-full"
+          style={`height: 32px; bottom: 50%; left: 50%; transform-origin: bottom center; transform: translateX(-50%) rotate(${qiblaRounded}deg);`}
+        ></div>
+        <div
+          class="absolute w-1 bg-red-400 rounded-full"
+          style="height: 32px; top: 50%; left: 50%; transform-origin: top center; transform: translateX(-50%);"
+        ></div>
+        <div class="absolute top-1 left-1/2 -translate-x-1/2 text-xs font-bold text-gray-500">ش</div>
+        <div class="absolute bottom-1 left-1/2 -translate-x-1/2 text-xs font-bold text-gray-500">ج</div>
+      </div>
+    </div>
+    <div>
+      <div class="text-3xl font-bold text-primary-700">{qiblaRounded}°</div>
+      <div class="text-sm text-gray-500 mt-1">من الشمال باتجاه الغرب</div>
+      <div class="text-xs text-gray-400 mt-1">
+        المسافة إلى مكة المكرمة: {Math.round(
+          6371 * Math.acos(
+            Math.sin(cityLatR) * Math.sin(meccaLat) +
+            Math.cos(cityLatR) * Math.cos(meccaLat) * Math.cos(meccaLng - cityLngR)
+          )
+        ).toLocaleString('ar')} كم
+      </div>
+    </div>
+  </div>
+</div>

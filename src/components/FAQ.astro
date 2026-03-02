@@ -1,0 +1,48 @@
+---
+interface FAQItem {
+  q: string;
+  a: string;
+}
+interface Props {
+  items: FAQItem[];
+  cityNameAr?: string;
+}
+const { items, cityNameAr } = Astro.props;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": items.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a
+    }
+  }))
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<section class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+  <h2 class="text-lg font-bold text-gray-800 mb-4 flex items-center gap-2">
+    <span>❓</span> أسئلة شائعة
+    {cityNameAr && <span class="text-gray-500 font-normal text-base">— {cityNameAr}</span>}
+  </h2>
+  <div class="space-y-3">
+    {items.map((item, i) => (
+      <details class="group border border-gray-200 rounded-xl overflow-hidden">
+        <summary class="flex items-center justify-between p-4 cursor-pointer bg-gray-50 hover:bg-gray-100 transition-colors font-medium text-gray-800 text-sm list-none">
+          <span>{item.q}</span>
+          <svg class="w-4 h-4 text-gray-400 transition-transform group-open:rotate-180 flex-shrink-0 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </summary>
+        <div class="p-4 text-sm text-gray-700 leading-relaxed bg-white border-t border-gray-100">
+          {item.a}
+        </div>
+      </details>
+    ))}
+  </div>
+</section>

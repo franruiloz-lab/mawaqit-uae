@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Noto Naskh Arabic', 'Noto Sans Arabic', Tahoma, Arial, sans-serif;
+    direction: rtl;
+    text-align: right;
+  }
+
+  body {
+    @apply bg-gray-50 text-gray-900 antialiased;
+  }
+
+  /* Smooth scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Better tap targets for mobile */
+  a, button {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  /* Tables inherit font */
+  table {
+    font-family: inherit;
+  }
+}
+
+@layer utilities {
+  /* Arabic number class (force Arabic numerals) */
+  .ar-nums {
+    font-feature-settings: "lnum" 0;
+  }
+
+  /* Prayer time specific */
+  .prayer-time {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.025em;
+  }
+}
+
+/* Prayer time card active glow */
+.prayer-active {
+  border-color: #fbbf24 !important;
+  background-color: #fffbeb !important;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.25);
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  h1 { font-size: 1.375rem; }
+  .text-5xl { font-size: 2.5rem; }
+}
+
+/* Print styles - useful for monthly table */
+@media print {
+  header, footer, nav, .no-print { display: none !important; }
+  body { background: white; }
+  table { page-break-inside: avoid; }
+}

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mawaqit-uae.com/sitemap-index.xml

@@ -1,0 +1,44 @@
+import type { APIRoute } from 'astro';
+import { cities } from '../data/cities';
+
+export const GET: APIRoute = () => {
+  const baseUrl = 'https://mawaqit-uae.com';
+  const today = new Date().toISOString().split('T')[0];
+
+  const staticPages = [
+    { url: '/', priority: '1.0', changefreq: 'daily' },
+    { url: '/maghrib', priority: '0.9', changefreq: 'daily' },
+    { url: '/ramadan', priority: '0.8', changefreq: 'weekly' },
+  ];
+
+  const cityPages = cities.map(c => ({
+    url: `/${c.id}`,
+    priority: c.volume > 5000 ? '0.9' : '0.8',
+    changefreq: 'daily',
+  }));
+
+  const allPages = [...staticPages, ...cityPages];
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+${allPages
+  .map(
+    p => `  <url>
+    <loc>${baseUrl}${p.url}</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>${p.changefreq}</changefreq>
+    <priority>${p.priority}</priority>
+    <xhtml:link rel="alternate" hreflang="ar" href="${baseUrl}${p.url}"/>
+  </url>`
+  )
+  .join('\n')}
+</urlset>`;
+
+  return new Response(xml, {
+    headers: {
+      'Content-Type': 'application/xml; charset=utf-8',
+      'Cache-Control': 'public, max-age=3600',
+    },
+  });
+};

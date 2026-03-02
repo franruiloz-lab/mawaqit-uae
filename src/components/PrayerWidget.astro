@@ -1,0 +1,250 @@
+---
+interface Props {
+  cityId: string;
+  cityNameAr: string;
+  lat: number;
+  lng: number;
+}
+const { cityId, cityNameAr, lat, lng } = Astro.props;
+---
+
+<!-- Server placeholder shown until JS loads -->
+<div
+  id="prayer-widget"
+  data-lat={lat}
+  data-lng={lng}
+  data-city={cityId}
+  class="w-full"
+>
+  <!-- Maghrib highlight - most searched prayer -->
+  <div class="bg-gradient-to-br from-primary-600 to-primary-800 rounded-2xl p-5 mb-4 text-white text-center shadow-lg">
+    <div class="text-sm font-medium text-primary-200 mb-1">موعد أذان المغرب اليوم</div>
+    <div id="maghrib-time" class="text-5xl font-bold tracking-wide mb-1 loading-pulse">--:-- م</div>
+    <div class="text-primary-200 text-sm" id="maghrib-label">جارٍ التحميل...</div>
+  </div>
+
+  <!-- Next prayer countdown -->
+  <div id="next-prayer-banner" class="bg-gold-500 text-white rounded-xl p-3 mb-4 text-center hidden">
+    <div class="text-xs text-yellow-100">الصلاة القادمة</div>
+    <div class="font-bold text-lg" id="next-prayer-name">—</div>
+    <div class="text-sm text-yellow-100">
+      تبدأ بعد:
+      <span id="countdown" class="font-mono font-bold text-base">00:00:00</span>
+    </div>
+  </div>
+
+  <!-- All 5 prayers grid -->
+  <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-4">
+    {[
+      { id: 'fajr',    nameAr: 'الفجر',    icon: '🌙', primary: false },
+      { id: 'sunrise', nameAr: 'الشروق',   icon: '🌅', primary: false },
+      { id: 'dhuhr',   nameAr: 'الظهر',    icon: '☀️', primary: false },
+      { id: 'asr',     nameAr: 'العصر',    icon: '🌤️', primary: false },
+      { id: 'maghrib', nameAr: 'المغرب',   icon: '🌇', primary: true  },
+      { id: 'isha',    nameAr: 'العشاء',   icon: '🌃', primary: false },
+    ].map(prayer => (
+      <div
+        id={`card-${prayer.id}`}
+        class={`rounded-xl p-3 text-center transition-all border-2 ${
+          prayer.primary
+            ? 'bg-primary-50 border-primary-400 shadow-md'
+            : 'bg-white border-gray-100 shadow-sm'
+        }`}
+      >
+        <div class="text-2xl mb-1">{prayer.icon}</div>
+        <div class={`text-xs font-medium mb-1 ${prayer.primary ? 'text-primary-700' : 'text-gray-500'}`}>
+          {prayer.nameAr}
+        </div>
+        <div
+          id={`${prayer.id}-time`}
+          class={`text-lg font-bold loading-pulse ${prayer.primary ? 'text-primary-700' : 'text-gray-800'}`}
+        >
+          --:--
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Date display -->
+  <div class="text-center text-sm text-gray-500 mb-2" id="today-date">
+    جارٍ تحديد التاريخ...
+  </div>
+</div>
+
+<style>
+  .loading-pulse {
+    animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .prayer-active {
+    border-color: #fbbf24 !important;
+    background-color: #fffbeb !important;
+    box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.3) !important;
+  }
+</style>
+
+<script>
+// ── Prayer time calculation (PrayTimes algorithm, MWL method) ────────────────
+const DEG = Math.PI / 180;
+const RAD = 180 / Math.PI;
+
+function fixAngle(a: number) { return fix(a, 360); }
+function fix(a: number, b: number) { a = a - b * Math.floor(a / b); return a < 0 ? a + b : a; }
+function sin(d: number) { return Math.sin(d * DEG); }
+function cos(d: number) { return Math.cos(d * DEG); }
+function tan(d: number) { return Math.tan(d * DEG); }
+function asin(d: number) { return Math.asin(d) * RAD; }
+function atan2(y: number, x: number) { return Math.atan2(y, x) * RAD; }
+
+function sunPos(jd: number) {
+  const D = jd - 2451545.0;
+  const g = fixAngle(357.529 + 0.98560028 * D);
+  const q = fixAngle(280.459 + 0.98564736 * D);
+  const L = fixAngle(q + 1.915 * sin(g) + 0.020 * sin(2 * g));
+  const e = 23.439 - 0.00000036 * D;
+  const RA = atan2(cos(e) * sin(L), cos(L)) / 15;
+  return { decl: asin(sin(e) * sin(L)), eqt: q / 15 - fixAngle(RA) };
+}
+
+function julian(y: number, m: number, d: number) {
+  if (m <= 2) { y -= 1; m += 12; }
+  const A = Math.floor(y / 100);
+  const B = 2 - A + Math.floor(A / 4);
+  return Math.floor(365.25 * (y + 4716)) + Math.floor(30.6001 * (m + 1)) + d + B - 1524.5;
+}
+
+function calcAngle(lat: number, decl: number, angle: number) {
+  return asin(-sin(angle) / (cos(lat) * cos(decl)) - tan(lat) * tan(decl));
+}
+
+function getPrayerTimes(lat: number, lng: number, date: Date) {
+  const jd = julian(date.getFullYear(), date.getMonth() + 1, date.getDate()) - lng / (15 * 24);
+  const { decl, eqt } = sunPos(jd);
+  const tz = 4; // UAE UTC+4
+  const noon = 12 - eqt - lng / 15 + tz;
+
+  const fajrH  = noon - calcAngle(lat, decl, 18) / 15;
+  const sunrH  = noon - calcAngle(lat, decl, 0.833) / 15;
+  const asrAng = asin(1 / (1 + tan(Math.abs(lat - decl))));
+  const asrH   = noon + asin(-sin(asrAng) / (cos(lat) * cos(decl)) - tan(lat) * tan(decl)) / 15;
+  const maghH  = noon + calcAngle(lat, decl, 0.833) / 15;
+  const ishaH  = noon + calcAngle(lat, decl, 17) / 15;
+
+  function toDate(hours: number) {
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    const mins = Math.round(hours * 60);
+    d.setHours(Math.floor(mins / 60), mins % 60, 0, 0);
+    return d;
+  }
+
+  return {
+    fajr:    toDate(fajrH),
+    sunrise: toDate(sunrH),
+    dhuhr:   toDate(noon + 0.033),
+    asr:     toDate(asrH),
+    maghrib: toDate(maghH),
+    isha:    toDate(ishaH),
+  };
+}
+
+function fmt(d: Date) {
+  const h = d.getHours(), m = d.getMinutes().toString().padStart(2, '0');
+  const h12 = h > 12 ? h - 12 : h === 0 ? 12 : h;
+  return `${h12}:${m} ${h >= 12 ? 'م' : 'ص'}`;
+}
+
+// ── Init ─────────────────────────────────────────────────────────────────────
+const widget = document.getElementById('prayer-widget')!;
+const lat = parseFloat(widget.dataset.lat!);
+const lng = parseFloat(widget.dataset.lng!);
+
+const now = new Date();
+const times = getPrayerTimes(lat, lng, now);
+
+const prayerList = [
+  { id: 'fajr',    nameAr: 'الفجر',   time: times.fajr    },
+  { id: 'sunrise', nameAr: 'الشروق',  time: times.sunrise },
+  { id: 'dhuhr',   nameAr: 'الظهر',   time: times.dhuhr   },
+  { id: 'asr',     nameAr: 'العصر',   time: times.asr     },
+  { id: 'maghrib', nameAr: 'المغرب',  time: times.maghrib },
+  { id: 'isha',    nameAr: 'العشاء',  time: times.isha    },
+];
+
+// Fill times into DOM
+for (const p of prayerList) {
+  const el = document.getElementById(`${p.id}-time`);
+  if (el) {
+    el.textContent = fmt(p.time);
+    el.classList.remove('loading-pulse');
+  }
+}
+
+// Maghrib highlight text
+const maghribLabel = document.getElementById('maghrib-label');
+if (maghribLabel) {
+  const diff = times.maghrib.getTime() - now.getTime();
+  if (diff > 0) {
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    maghribLabel.textContent = h > 0
+      ? `بعد ${h} ساعة و${m} دقيقة`
+      : `بعد ${m} دقيقة`;
+  } else {
+    maghribLabel.textContent = 'انتهى وقت المغرب';
+  }
+}
+
+// Date
+const dateEl = document.getElementById('today-date');
+if (dateEl) {
+  const arabicDays = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+  const arabicMonths = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+  dateEl.textContent = `${arabicDays[now.getDay()]} ${now.getDate()} ${arabicMonths[now.getMonth()]} ${now.getFullYear()}`;
+}
+
+// Active prayer highlighting + next prayer countdown
+function updateActive() {
+  const now2 = new Date();
+  let next = null;
+  let nextName = '';
+
+  for (let i = 0; i < prayerList.length; i++) {
+    const card = document.getElementById(`card-${prayerList[i].id}`);
+    card?.classList.remove('prayer-active');
+    if (prayerList[i].time > now2 && !next) {
+      next = prayerList[i].time;
+      nextName = prayerList[i].nameAr;
+    }
+  }
+
+  // Highlight current prayer (the last one that's passed)
+  let currentIdx = -1;
+  for (let i = 0; i < prayerList.length; i++) {
+    if (prayerList[i].time <= now2) currentIdx = i;
+  }
+  if (currentIdx >= 0) {
+    document.getElementById(`card-${prayerList[currentIdx].id}`)?.classList.add('prayer-active');
+  }
+
+  // Countdown to next prayer
+  const banner = document.getElementById('next-prayer-banner');
+  const countdownEl = document.getElementById('countdown');
+  const nextNameEl = document.getElementById('next-prayer-name');
+  if (next && banner && countdownEl && nextNameEl) {
+    banner.classList.remove('hidden');
+    nextNameEl.textContent = nextName;
+    const diff = next.getTime() - now2.getTime();
+    const hh = Math.floor(diff / 3600000).toString().padStart(2, '0');
+    const mm = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
+    const ss = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
+    countdownEl.textContent = `${hh}:${mm}:${ss}`;
+  }
+}
+
+updateActive();
+setInterval(updateActive, 1000);
+</script>

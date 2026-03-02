@@ -1,0 +1,163 @@
+---
+import Base from '../layouts/Base.astro';
+import PrayerWidget from '../components/PrayerWidget.astro';
+import CityGrid from '../components/CityGrid.astro';
+import FAQ from '../components/FAQ.astro';
+import { getCityById, cities } from '../data/cities';
+import { calcPrayerTimes, formatTimeAr, arabicMonths } from '../utils/prayer';
+
+const now = new Date();
+const monthName = arabicMonths[now.getMonth() + 1];
+const arabicDays = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+const dayName = arabicDays[now.getDay()];
+
+// Compute Maghrib for all major cities (good for SEO)
+const majorCities = ['dubai', 'abu-dhabi', 'sharjah', 'ajman', 'al-ain', 'ras-al-khaimah', 'fujairah', 'umm-al-quwain'];
+const cityMaghrib = majorCities.map(id => {
+  const c = getCityById(id)!;
+  const t = calcPrayerTimes(c.lat, c.lng, now);
+  return { city: c, maghrib: formatTimeAr(t.maghrib) };
+});
+
+const dubaiCity = getCityById('dubai')!;
+const dubaiTimes = calcPrayerTimes(dubaiCity.lat, dubaiCity.lng, now);
+
+const title = `موعد اذان المغرب اليوم في الإمارات | ${dayName} ${now.getDate()} ${monthName} ${now.getFullYear()}`;
+const description = `موعد اذان المغرب اليوم في جميع مدن الإمارات العربية المتحدة — دبي ${formatTimeAr(dubaiTimes.maghrib)} · أبوظبي · الشارقة · عجمان · رأس الخيمة. تحديث يومي دقيق لوقت أذان المغرب.`;
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "https://mawaqit-uae.com/" },
+    { "@type": "ListItem", "position": 2, "name": "موعد أذان المغرب", "item": "https://mawaqit-uae.com/maghrib" },
+  ]
+};
+
+const faqItems = [
+  {
+    q: 'ما هو موعد اذان المغرب اليوم في دبي؟',
+    a: `موعد أذان المغرب في دبي اليوم ${dayName} ${now.getDate()} ${monthName} هو ${formatTimeAr(dubaiTimes.maghrib)}.`,
+  },
+  {
+    q: 'لماذا يختلف موعد المغرب بين مدن الإمارات؟',
+    a: 'يختلف موعد المغرب بحسب موضع الشمس عند كل مدينة، وبالتحديد بحسب خط الطول الجغرافي. المدن الشرقية (كالفجيرة) تشهد الغروب قبل المدن الغربية (كأبوظبي) بعدة دقائق.',
+  },
+  {
+    q: 'كم مدة وقت صلاة المغرب؟',
+    a: 'يبدأ وقت المغرب من غروب الشمس وينتهي باختفاء الشفق الأحمر، وهو ما يعادل تقريباً 1-1.5 ساعة بعد الأذان. بعدها يدخل وقت العشاء.',
+  },
+  {
+    q: 'هل يتغير موعد المغرب في رمضان؟',
+    a: 'نعم، يتغير موعد المغرب يومياً بغض النظر عن رمضان أو غيره، إذ يتحدد دائماً بموعد غروب الشمس. في رمضان يكون المغرب هو وقت الإفطار.',
+  },
+  {
+    q: 'ما هي طريقة حساب موعد المغرب المستخدمة في الإمارات؟',
+    a: 'تستخدم الإمارات رسمياً طريقة رابطة العالم الإسلامي (زاوية فجر 18° وعشاء 17°). أما المغرب فيُحسب بغروب الشمس مباشرة (0.833 درجة تحت الأفق).',
+  },
+];
+---
+
+<Base
+  title={title}
+  description={description}
+  canonical="/maghrib"
+  schema={breadcrumbSchema}
+>
+  <div class="max-w-5xl mx-auto px-4 py-6">
+
+    <div class="mb-5">
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-1">
+        موعد اذان المغرب اليوم في الإمارات
+      </h1>
+      <p class="text-gray-500 text-sm">
+        {dayName}، {now.getDate()} {monthName} {now.getFullYear()} · تحديث يومي تلقائي
+      </p>
+    </div>
+
+    <!-- Maghrib times for all cities — great SEO content -->
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-6">
+      <div class="bg-gradient-to-l from-primary-600 to-primary-800 text-white px-5 py-4">
+        <h2 class="font-bold text-lg">🌇 موعد المغرب اليوم في جميع المدن</h2>
+        <p class="text-primary-200 text-sm mt-1">{dayName} {now.getDate()} {monthName} {now.getFullYear()}</p>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-4">
+        {cityMaghrib.map(({ city, maghrib }) => (
+          <a
+            href={`/${city.id}`}
+            class="flex flex-col items-center p-4 border-b border-l border-gray-100 hover:bg-primary-50 transition-colors group"
+          >
+            <div class="text-xs text-gray-500 mb-1 group-hover:text-primary-600">{city.nameAr}</div>
+            <div class="text-2xl font-bold text-primary-700 group-hover:text-primary-800">{maghrib}</div>
+            <div class="text-xs text-gray-400 mt-1 group-hover:text-primary-500">← تفاصيل</div>
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="md:col-span-2 space-y-5">
+
+        <!-- Dubai widget as default -->
+        <PrayerWidget
+          cityId={dubaiCity.id}
+          cityNameAr={dubaiCity.nameAr}
+          lat={dubaiCity.lat}
+          lng={dubaiCity.lng}
+        />
+
+        <!-- Article about Maghrib prayer -->
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+          <h2 class="text-lg font-bold text-gray-800 mb-4">صلاة المغرب — وقتها وأحكامها</h2>
+          <div class="space-y-4 text-sm text-gray-700 leading-relaxed">
+            <div>
+              <h3 class="font-bold text-gray-800 mb-1">⏰ وقت صلاة المغرب</h3>
+              <p>
+                يبدأ وقت صلاة المغرب بغروب الشمس، أي لحظة اختفاء القرص الشمسي عن الأفق كلياً.
+                وينتهي وقتها باختفاء الشفق الأحمر من الأفق الغربي، وهو ما يستغرق عادةً ما بين
+                ساعة وساعة ونصف.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-bold text-gray-800 mb-1">🕌 ركعاتها وسننها</h3>
+              <p>
+                صلاة المغرب ثلاث ركعات مفروضة. وتُصلّى ركعتان نافلة بعدها (السنة البعدية).
+                يُستحب التبكير بها فور سماع الأذان.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-bold text-gray-800 mb-1">🌙 المغرب في رمضان</h3>
+              <p>
+                في شهر رمضان المبارك، يكون أذان المغرب هو إشارة الإفطار. يُسارع المسلمون
+                إلى تناول وجبة الإفطار عند سماع الأذان استناداً إلى السنة النبوية.
+                تجد في صفحة <a href="/ramadan" class="text-primary-600 hover:underline">مواقيت رمضان</a>
+                جدولاً كاملاً لشهر رمضان.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-bold text-gray-800 mb-1">📍 كيف يُحسب وقت المغرب في الإمارات؟</h3>
+              <p>
+                تعتمد الهيئة العامة للشؤون الإسلامية والأوقاف في الإمارات طريقة علمية دقيقة
+                لحساب مواقيت الصلاة تعتمد على الإحداثيات الجغرافية لكل مدينة وزاوية ميل
+                الشمس. نستخدم في هذا الموقع نفس المعادلات الفلكية المعتمدة.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <FAQ items={faqItems} />
+      </div>
+
+      <div class="space-y-4">
+        <CityGrid />
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
+          <h3 class="font-bold text-gray-700 mb-3 text-sm">روابط سريعة</h3>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/ramadan" class="text-primary-600 hover:underline flex gap-2"><span>🌙</span>مواقيت رمضان</a></li>
+            <li><a href="/" class="text-gray-500 hover:text-primary-600 flex gap-2"><span>🏠</span>الصفحة الرئيسية</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>
