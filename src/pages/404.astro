@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import { u } from '../utils/url';
+
+const title = '404 — الصفحة غير موجودة | مواقيت الصلاة الإمارات';
+const description = 'الصفحة التي تبحث عنها غير موجودة. عد إلى الرئيسية لعرض مواقيت الصلاة.';
+---
+
+<Base title={title} description={description}>
+  <div class="max-w-xl mx-auto px-4 py-16 text-center">
+    <div class="text-8xl mb-4">🕌</div>
+    <h1 class="text-4xl font-bold text-gray-800 mb-2">404</h1>
+    <p class="text-xl text-gray-600 mb-2">الصفحة غير موجودة</p>
+    <p class="text-gray-500 text-sm mb-8">
+      عذراً، الصفحة التي تبحث عنها غير موجودة أو ربما تم نقلها.
+    </p>
+    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+      <a
+        href={u('')}
+        class="bg-primary-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-primary-700 transition-colors"
+      >
+        🏠 الرئيسية
+      </a>
+      <a
+        href={u('maghrib')}
+        class="bg-white text-primary-600 border border-primary-300 px-6 py-3 rounded-xl font-semibold hover:bg-primary-50 transition-colors"
+      >
+        🌇 موعد المغرب
+      </a>
+    </div>
+  </div>
+</Base>

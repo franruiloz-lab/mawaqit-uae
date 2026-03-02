@@ -5,13 +5,11 @@ import CityGrid from '../components/CityGrid.astro';
 import FAQ from '../components/FAQ.astro';
 import { getCityById } from '../data/cities';
 import { calcPrayerTimes, formatTimeAr, arabicMonths } from '../utils/prayer';
+import { u } from '../utils/url';
 
-// Default to Dubai on homepage (highest volume)
 const defaultCity = getCityById('dubai')!;
-
 const now = new Date();
 const todayTimes = calcPrayerTimes(defaultCity.lat, defaultCity.lng, now);
-const monthName = arabicMonths[now.getMonth() + 1];
 
 const title = `موعد اذان المغرب اليوم | مواقيت الصلاة الإمارات ${now.getFullYear()}`;
 const description = `موعد اذان المغرب اليوم في الإمارات العربية المتحدة — دبي، الشارقة، عجمان، أبوظبي، رأس الخيمة وجميع المدن. المغرب ${formatTimeAr(todayTimes.maghrib)} · الفجر ${formatTimeAr(todayTimes.fajr)} · مواقيت الصلاة الخمس بدقة.`;
@@ -19,46 +17,41 @@ const description = `موعد اذان المغرب اليوم في الإمار
 const faqItems = [
   {
     q: 'متى موعد اذان المغرب اليوم في الإمارات؟',
-    a: `موعد أذان المغرب يتغير كل يوم حسب موعد غروب الشمس. اليوم في دبي، المغرب في تمام الساعة ${formatTimeAr(todayTimes.maghrib)}. يمكنك اختيار مدينتك من القائمة أعلاه للحصول على الوقت الدقيق.`,
+    a: `موعد أذان المغرب يتغير كل يوم حسب موعد غروب الشمس. اليوم في دبي، المغرب في تمام الساعة ${formatTimeAr(todayTimes.maghrib)}. يمكنك اختيار مدينتك من القائمة للحصول على الوقت الدقيق.`,
   },
   {
     q: 'كيف يُحسب موعد صلاة المغرب؟',
-    a: 'يُحسب موعد صلاة المغرب بمجرد غروب الشمس تحت الأفق. نستخدم طريقة حساب رابطة العالم الإسلامي المعتمدة، وهي المعتمدة رسمياً من وزارة الشؤون الإسلامية في الإمارات.',
+    a: 'يُحسب موعد صلاة المغرب بمجرد غروب الشمس تحت الأفق. نستخدم طريقة رابطة العالم الإسلامي المعتمدة رسمياً من وزارة الشؤون الإسلامية في الإمارات.',
   },
   {
     q: 'هل أوقات الصلاة المعروضة دقيقة؟',
-    a: 'نعم، الأوقات محسوبة بدقة عالية باستخدام الإحداثيات الجغرافية الدقيقة لكل مدينة وطريقة رابطة العالم الإسلامي. قد يكون هناك فارق دقيقة أو دقيقتين عن الأوقات الرسمية لوزارة الأوقاف.',
+    a: 'نعم، الأوقات محسوبة بدقة عالية باستخدام الإحداثيات الجغرافية الدقيقة لكل مدينة. قد يكون هناك فارق دقيقة عن الأوقات الرسمية لوزارة الأوقاف.',
   },
   {
     q: 'ما هي الصلوات الخمس وأوقاتها في الإمارات؟',
-    a: 'الصلوات الخمس هي: الفجر (قبيل الشروق)، الظهر (بعد منتصف النهار)، العصر (بعد الظهر)، المغرب (عند الغروب)، العشاء (بعد الغروب). تتغير الأوقات يومياً مع تغير موضع الشمس.',
+    a: 'الصلوات الخمس: الفجر (قبيل الشروق)، الظهر (بعد منتصف النهار)، العصر (بعد الظهر)، المغرب (عند الغروب)، العشاء (بعد الغروب). تتغير الأوقات يومياً.',
   },
   {
     q: 'هل يمكنني معرفة مواقيت الصلاة في مدينتي تلقائياً؟',
-    a: 'اضغط على مدينتك من قائمة المدن في الصفحة للحصول على الأوقات الدقيقة. نوفر أوقات الصلاة لجميع مدن الإمارات العربية المتحدة.',
+    a: 'اضغط على زر "تحديد موقعي" أعلاه أو اختر مدينتك من القائمة للحصول على الأوقات الدقيقة.',
   },
 ];
 
 const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "مواقيت الصلاة في الإمارات — موعد اذان المغرب اليوم",
-  "description": description,
-  "url": "https://mawaqit-uae.com/",
-  "inLanguage": "ar",
-  "dateModified": now.toISOString(),
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  name: 'مواقيت الصلاة في الإمارات — موعد اذان المغرب اليوم',
+  description,
+  url: 'https://franruiloz-lab.github.io/mawaqit-uae/',
+  inLanguage: 'ar',
+  dateModified: now.toISOString(),
 };
 ---
 
-<Base
-  title={title}
-  description={description}
-  canonical="/"
-  schema={websiteSchema}
->
+<Base title={title} description={description} canonical="/" schema={websiteSchema}>
   <div class="max-w-5xl mx-auto px-4 py-6">
 
-    <!-- Hero section -->
+    <!-- H1 -->
     <div class="mb-6">
       <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-1 leading-tight">
         موعد اذان المغرب اليوم في الإمارات
@@ -70,18 +63,17 @@ const websiteSchema = {
 
     <div class="grid md:grid-cols-3 gap-6">
 
-      <!-- Left col: prayer widget -->
+      <!-- Main column -->
       <div class="md:col-span-2 space-y-4">
 
         <!-- Geolocation prompt -->
         <div id="geo-prompt" class="bg-blue-50 border border-blue-200 rounded-xl p-3 flex items-center gap-3 text-sm text-blue-800 hidden">
-          <span class="text-xl">📍</span>
-          <div class="flex-1">
-            <span>عرض الأوقات حسب موقعك الحالي</span>
-          </div>
+          <span class="text-xl flex-shrink-0">📍</span>
+          <div class="flex-1">عرض الأوقات حسب موقعك الحالي</div>
           <button
             id="geo-btn"
-            class="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-blue-700 transition-colors flex-shrink-0"
+            type="button"
+            class="bg-blue-600 text-white px-3 py-1.5 rounded-lg text-xs font-medium hover:bg-blue-700 active:bg-blue-800 transition-colors flex-shrink-0 cursor-pointer"
           >
             تحديد موقعي
           </button>
@@ -94,22 +86,25 @@ const websiteSchema = {
           lng={defaultCity.lng}
         />
 
-        <!-- Info article about Maghrib -->
+        <!-- Info article -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
           <h2 class="text-lg font-bold text-gray-800 mb-3">صلاة المغرب — ما تحتاج معرفته</h2>
-          <div class="prose prose-sm text-gray-700 space-y-3 leading-relaxed">
+          <div class="text-sm text-gray-700 space-y-3 leading-relaxed">
             <p>
-              <strong>صلاة المغرب</strong> هي الصلاة الرابعة من الصلوات الخمس المفروضة على المسلم في اليوم والليلة.
-              يبدأ وقتها بمجرد غروب الشمس تحت الأفق، وينتهي عند دخول وقت صلاة العشاء.
+              <strong>صلاة المغرب</strong> هي الصلاة الرابعة من الصلوات الخمس المفروضة على المسلم.
+              يبدأ وقتها بمجرد غروب الشمس، وينتهي عند دخول وقت صلاة العشاء.
             </p>
             <p>
-              في الإمارات العربية المتحدة، تُحدد الأوقات الرسمية من قِبَل
-              <strong>وزارة الشؤون الإسلامية والأوقاف</strong> (أوقاف) باستخدام طريقة حساب دقيقة تعتمد
-              على إحداثيات كل إمارة.
+              في الإمارات، تُحدد الأوقات الرسمية من قِبَل <strong>وزارة الشؤون الإسلامية والأوقاف</strong>
+              باستخدام طريقة حساب تعتمد على إحداثيات كل إمارة.
             </p>
             <p>
-              يتغير موعد أذان المغرب يومياً بمقدار دقيقة أو دقيقتين تقريباً بحسب تغير مسار الشمس
-              على مدار العام. يكون وقت المغرب أبكر في الشتاء وأمتد في الصيف.
+              يتغير موعد أذان المغرب يومياً بضع دقائق بحسب تغير مسار الشمس.
+              يكون وقت المغرب أبكر في الشتاء وأمتد في الصيف.
+            </p>
+            <p>
+              لمعرفة وقت المغرب في مدينة بعينها، اختر المدينة من القائمة على اليمين أو
+              <a href={u('maghrib')} class="text-primary-600 hover:underline">زر صفحة أذان المغرب</a>.
             </p>
           </div>
         </div>
@@ -117,37 +112,42 @@ const websiteSchema = {
         <FAQ items={faqItems} />
       </div>
 
-      <!-- Right col: city selector -->
+      <!-- Sidebar -->
       <div class="space-y-4">
         <CityGrid currentCityId={defaultCity.id} />
 
         <!-- Quick links -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-4">
           <h3 class="font-bold text-gray-700 mb-3 text-sm">روابط سريعة</h3>
-          <ul class="space-y-2 text-sm">
+          <ul class="space-y-1 text-sm">
             <li>
-              <a href="/maghrib" class="flex items-center gap-2 text-primary-600 hover:text-primary-800 transition-colors">
+              <a href={u('maghrib')} class="flex items-center gap-2 py-2 px-2 rounded-lg text-primary-600 hover:bg-primary-50 transition-colors">
                 <span>🌇</span> موعد أذان المغرب
               </a>
             </li>
             <li>
-              <a href="/ramadan" class="flex items-center gap-2 text-primary-600 hover:text-primary-800 transition-colors">
+              <a href={u('ramadan')} class="flex items-center gap-2 py-2 px-2 rounded-lg text-primary-600 hover:bg-primary-50 transition-colors">
                 <span>🌙</span> مواقيت صلاة رمضان
               </a>
             </li>
             <li>
-              <a href="/dubai" class="flex items-center gap-2 text-gray-600 hover:text-primary-600 transition-colors">
+              <a href={u('dubai')} class="flex items-center gap-2 py-2 px-2 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors">
                 <span>🕌</span> دبي
               </a>
             </li>
             <li>
-              <a href="/abu-dhabi" class="flex items-center gap-2 text-gray-600 hover:text-primary-600 transition-colors">
+              <a href={u('abu-dhabi')} class="flex items-center gap-2 py-2 px-2 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors">
                 <span>🕌</span> أبوظبي
               </a>
             </li>
             <li>
-              <a href="/sharjah" class="flex items-center gap-2 text-gray-600 hover:text-primary-600 transition-colors">
+              <a href={u('sharjah')} class="flex items-center gap-2 py-2 px-2 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors">
                 <span>🕌</span> الشارقة
+              </a>
+            </li>
+            <li>
+              <a href={u('ajman')} class="flex items-center gap-2 py-2 px-2 rounded-lg text-gray-600 hover:bg-gray-50 transition-colors">
+                <span>🕌</span> عجمان
               </a>
             </li>
           </ul>
@@ -158,36 +158,44 @@ const websiteSchema = {
 </Base>
 
 <script>
-// Show geolocation prompt
-const prompt = document.getElementById('geo-prompt');
-const btn = document.getElementById('geo-btn');
-if (navigator.geolocation && prompt) {
-  prompt.classList.remove('hidden');
-  btn?.addEventListener('click', () => {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const { latitude, longitude } = pos.coords;
-        // Redirect to nearest city by comparing coords
-        const cities = [
-          { id: 'dubai', lat: 25.2048, lng: 55.2708 },
-          { id: 'sharjah', lat: 25.3573, lng: 55.4033 },
-          { id: 'ajman', lat: 25.4052, lng: 55.5136 },
-          { id: 'abu-dhabi', lat: 24.4539, lng: 54.3773 },
-          { id: 'al-ain', lat: 24.2075, lng: 55.7447 },
-          { id: 'ras-al-khaimah', lat: 25.7895, lng: 55.9432 },
-          { id: 'fujairah', lat: 25.1288, lng: 56.3265 },
-          { id: 'umm-al-quwain', lat: 25.5647, lng: 55.5550 },
-        ];
-        let nearest = cities[0];
-        let minDist = Infinity;
-        for (const c of cities) {
-          const d = Math.sqrt((latitude - c.lat) ** 2 + (longitude - c.lng) ** 2);
-          if (d < minDist) { minDist = d; nearest = c; }
-        }
-        window.location.href = `/${nearest.id}`;
-      },
-      () => { prompt.textContent = 'لم نتمكن من تحديد موقعك. يرجى اختيار مدينتك من القائمة.'; }
-    );
-  });
-}
+  // Geolocation: show prompt and handle redirect
+  const prompt = document.getElementById('geo-prompt');
+  const btn = document.getElementById('geo-btn');
+
+  if (navigator.geolocation && prompt) {
+    prompt.classList.remove('hidden');
+
+    btn?.addEventListener('click', () => {
+      btn.textContent = 'جارٍ التحديد...';
+      (btn as HTMLButtonElement).disabled = true;
+
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          const { latitude: lat, longitude: lng } = pos.coords;
+          const cities = [
+            { id: 'dubai',         lat: 25.2048, lng: 55.2708 },
+            { id: 'sharjah',       lat: 25.3573, lng: 55.4033 },
+            { id: 'ajman',         lat: 25.4052, lng: 55.5136 },
+            { id: 'abu-dhabi',     lat: 24.4539, lng: 54.3773 },
+            { id: 'al-ain',        lat: 24.2075, lng: 55.7447 },
+            { id: 'ras-al-khaimah',lat: 25.7895, lng: 55.9432 },
+            { id: 'fujairah',      lat: 25.1288, lng: 56.3265 },
+            { id: 'umm-al-quwain', lat: 25.5647, lng: 55.5550 },
+          ];
+          let nearest = cities[0]!;
+          let minDist = Infinity;
+          for (const c of cities) {
+            const d = (lat - c.lat) ** 2 + (lng - c.lng) ** 2;
+            if (d < minDist) { minDist = d; nearest = c; }
+          }
+          // Use BASE_URL so it works on GitHub Pages
+          window.location.href = import.meta.env.BASE_URL + nearest.id;
+        },
+        () => {
+          if (prompt) prompt.innerHTML = '<span class="text-red-600">⚠️ لم نتمكن من تحديد موقعك. اختر مدينتك من القائمة.</span>';
+        },
+        { timeout: 8000 }
+      );
+    });
+  }
 </script>

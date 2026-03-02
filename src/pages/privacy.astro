@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import { u } from '../utils/url';
+
+const title = 'سياسة الخصوصية — مواقيت الصلاة في الإمارات';
+const description = 'سياسة خصوصية موقع مواقيت الصلاة في الإمارات — لا نجمع بيانات شخصية، لا تتبع، لا إعلانات.';
+---
+
+<Base title={title} description={description} canonical="/privacy" cityName="سياسة الخصوصية">
+  <div class="max-w-3xl mx-auto px-4 py-8">
+    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">سياسة الخصوصية</h1>
+    <p class="text-gray-500 text-sm mb-6">آخر تحديث: مارس 2025</p>
+
+    <div class="space-y-5 text-gray-700 text-sm leading-relaxed">
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">📋 ملخص سريع</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center">
+          <div class="bg-green-50 rounded-xl p-3">
+            <div class="text-2xl mb-1">✅</div>
+            <div class="font-semibold text-green-800 text-xs">لا بيانات شخصية</div>
+          </div>
+          <div class="bg-green-50 rounded-xl p-3">
+            <div class="text-2xl mb-1">✅</div>
+            <div class="font-semibold text-green-800 text-xs">لا تتبع أو تحليلات</div>
+          </div>
+          <div class="bg-green-50 rounded-xl p-3">
+            <div class="text-2xl mb-1">✅</div>
+            <div class="font-semibold text-green-800 text-xs">لا إعلانات</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">1. البيانات التي نجمعها</h2>
+        <p>
+          <strong>لا نجمع أي بيانات شخصية.</strong> الموقع موقع ثابت (Static Site) لا يحتوي
+          على قواعد بيانات أو خوادم خلفية.
+        </p>
+        <p class="mt-2">
+          إذا استخدمت ميزة "تحديد موقعي"، يُقرأ موقعك الجغرافي في المتصفح مباشرةً
+          <strong>دون إرساله إلى أي خادم</strong>. يُستخدم فقط لعرض أقرب مدينة لك.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">2. ملفات تعريف الارتباط (Cookies)</h2>
+        <p>
+          لا يستخدم هذا الموقع ملفات تعريف الارتباط (Cookies) بأي شكل.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">3. الخدمات الخارجية</h2>
+        <p>يستخدم الموقع الخدمات الخارجية التالية:</p>
+        <ul class="mt-2 space-y-2 list-disc list-inside text-gray-600">
+          <li>
+            <strong>Google Fonts</strong> — لتحميل الخط العربي (Noto Naskh Arabic).
+            قد تجمع Google بيانات الزيارة وفق
+            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:underline">سياسة خصوصية Google</a>.
+          </li>
+          <li>
+            <strong>GitHub Pages</strong> — استضافة الموقع. قد تُسجل GitHub سجلات الوصول
+            الخادم (Server Logs) وفق <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener noreferrer" class="text-primary-600 hover:underline">سياسة خصوصية GitHub</a>.
+          </li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">4. التعديلات على هذه السياسة</h2>
+        <p>
+          قد تُحدَّث هذه السياسة دورياً. أي تغييرات ستُنشر على هذه الصفحة مع تحديث تاريخ
+          "آخر تحديث" أعلاه.
+        </p>
+      </div>
+
+      <div class="text-center text-sm text-gray-500 pt-2">
+        <a href={u('')} class="text-primary-600 hover:underline">← العودة للرئيسية</a>
+      </div>
+
+    </div>
+  </div>
+</Base>

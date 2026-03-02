@@ -1,50 +1,40 @@
 ---
 import { cities } from '../data/cities';
 import '../styles/global.css';
+import { u } from '../utils/url';
 
 interface Props {
   title: string;
   description: string;
   canonical?: string;
-  ogImage?: string;
   cityName?: string;
   cityId?: string;
   schema?: object | object[];
 }
 
-const {
-  title,
-  description,
-  canonical,
-  cityName,
-  cityId,
-  schema,
-} = Astro.props;
+const { title, description, canonical, cityName, cityId, schema } = Astro.props;
 
-const siteUrl = 'https://mawaqit-uae.com';
-const canonicalUrl = canonical ? `${siteUrl}${canonical}` : `${siteUrl}${Astro.url.pathname}`;
+const siteUrl = 'https://franruiloz-lab.github.io/mawaqit-uae';
+const canonicalUrl = canonical
+  ? `${siteUrl}${canonical}`
+  : `${siteUrl}${Astro.url.pathname}`;
+
 const mainCities = cities.filter(c =>
-  ['dubai', 'abu-dhabi', 'sharjah', 'ajman', 'al-ain', 'ras-al-khaimah', 'fujairah', 'umm-al-quwain'].includes(c.id)
+  ['dubai','abu-dhabi','sharjah','ajman','al-ain','ras-al-khaimah','fujairah','umm-al-quwain'].includes(c.id)
 );
 
 const schemaJson = schema ? (Array.isArray(schema) ? schema : [schema]) : [];
 
-// Website-level schema always included
 const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "مواقيت الصلاة في الإمارات",
-  "url": siteUrl,
-  "description": "مواقيت الصلاة اليوم في جميع مدن الإمارات العربية المتحدة - أذان المغرب، الفجر، الظهر، العصر، العشاء",
-  "inLanguage": "ar",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": `${siteUrl}/{city}`
-    }
-  }
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'مواقيت الصلاة في الإمارات',
+  url: siteUrl,
+  description: 'مواقيت الصلاة اليوم في جميع مدن الإمارات العربية المتحدة',
+  inLanguage: 'ar',
 };
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <!DOCTYPE html>
@@ -52,15 +42,10 @@ const websiteSchema = {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalUrl} />
-
-  <!-- Hreflang -->
   <link rel="alternate" hreflang="ar" href={canonicalUrl} />
-  <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -70,32 +55,22 @@ const websiteSchema = {
   <meta property="og:locale" content="ar_AE" />
   <meta property="og:site_name" content="مواقيت الصلاة الإمارات" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content={title} />
-  <meta name="twitter:description" content={description} />
-
   <!-- PWA -->
-  <link rel="manifest" href="/manifest.json" />
+  <link rel="manifest" href={`${base}manifest.json`} />
   <meta name="theme-color" content="#097233" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
   <meta name="apple-mobile-web-app-title" content="مواقيت الصلاة" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
 
-  <!-- Google Fonts - Arabic -->
+  <!-- Arabic font -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Schema.org JSON-LD -->
+  <!-- Schema.org -->
   <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
   {schemaJson.map(s => (
     <script type="application/ld+json" set:html={JSON.stringify(s)} />
@@ -103,119 +78,172 @@ const websiteSchema = {
 </head>
 <body class="bg-gray-50 text-gray-900 font-arabic antialiased">
 
-  <!-- Header -->
+  <!-- ══ HEADER ══════════════════════════════════════════════════════════ -->
   <header class="bg-primary-600 text-white shadow-lg sticky top-0 z-50">
     <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
-      <a href="/" class="flex items-center gap-2 font-bold text-lg leading-tight">
+
+      <a href={u('')} class="flex items-center gap-2 font-bold text-lg leading-tight flex-shrink-0 min-h-0">
         <span class="text-2xl">🕌</span>
         <span>مواقيت الصلاة</span>
         <span class="text-primary-200 text-sm hidden sm:inline">الإمارات</span>
       </a>
-      <!-- City quick links -->
-      <nav class="hidden md:flex gap-1 text-sm">
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex gap-1 text-sm flex-wrap items-center">
         {mainCities.slice(0, 5).map(city => (
           <a
-            href={`/${city.id}`}
-            class={`px-2 py-1 rounded hover:bg-primary-700 transition-colors ${cityId === city.id ? 'bg-primary-800 font-semibold' : ''}`}
+            href={u(city.id)}
+            class={`px-2 py-1 rounded hover:bg-primary-700 transition-colors min-h-0 h-auto ${cityId === city.id ? 'bg-primary-800 font-semibold' : ''}`}
           >
             {city.nameAr}
           </a>
         ))}
+        <a href={u('maghrib')} class={`px-2 py-1 rounded hover:bg-primary-700 transition-colors min-h-0 h-auto ${cityId === 'maghrib' ? 'bg-primary-800 font-semibold' : ''}`}>
+          المغرب
+        </a>
+        <a href={u('ramadan')} class={`px-2 py-1 rounded hover:bg-primary-700 transition-colors min-h-0 h-auto ${cityId === 'ramadan' ? 'bg-primary-800 font-semibold' : ''}`}>
+          رمضان
+        </a>
       </nav>
-      <!-- Mobile city selector trigger -->
+
+      <!-- Mobile toggle button -->
       <button
         id="nav-toggle"
-        class="md:hidden p-2 rounded hover:bg-primary-700"
+        type="button"
+        class="md:hidden p-2 rounded-lg hover:bg-primary-700 transition-colors"
         aria-label="قائمة المدن"
+        aria-expanded="false"
       >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg id="icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+        <svg id="icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
         </svg>
       </button>
     </div>
+
     <!-- Mobile menu -->
     <div id="mobile-menu" class="hidden md:hidden bg-primary-700 border-t border-primary-500">
-      <div class="max-w-5xl mx-auto px-4 py-3 grid grid-cols-3 gap-2 text-sm text-center">
+      <div class="max-w-5xl mx-auto px-4 py-3 grid grid-cols-3 gap-1 text-sm text-center">
         {cities.map(city => (
           <a
-            href={`/${city.id}`}
+            href={u(city.id)}
             class={`py-2 px-1 rounded hover:bg-primary-600 transition-colors ${cityId === city.id ? 'bg-primary-800 font-semibold' : ''}`}
           >
             {city.nameAr}
           </a>
         ))}
-        <a href="/maghrib" class="py-2 px-1 rounded hover:bg-primary-600 col-span-1">أذان المغرب</a>
-        <a href="/ramadan" class="py-2 px-1 rounded hover:bg-primary-600 col-span-1">رمضان</a>
+      </div>
+      <div class="max-w-5xl mx-auto px-4 pb-3 grid grid-cols-2 gap-1 text-sm text-center border-t border-primary-600 pt-2">
+        <a href={u('maghrib')} class="py-2 rounded hover:bg-primary-600 transition-colors">🌇 أذان المغرب</a>
+        <a href={u('ramadan')} class="py-2 rounded hover:bg-primary-600 transition-colors">🌙 رمضان</a>
       </div>
     </div>
   </header>
 
-  <!-- Breadcrumb (if city page) -->
+  <!-- ══ BREADCRUMB ═══════════════════════════════════════════════════════ -->
   {cityName && (
     <nav class="bg-white border-b border-gray-200 text-sm" aria-label="breadcrumb">
       <div class="max-w-5xl mx-auto px-4 py-2 flex gap-2 items-center text-gray-500">
-        <a href="/" class="hover:text-primary-600">الرئيسية</a>
+        <a href={u('')} class="hover:text-primary-600 min-h-0 h-auto">الرئيسية</a>
         <span>›</span>
         <span class="text-gray-800 font-medium">{cityName}</span>
       </div>
     </nav>
   )}
 
-  <!-- Main content -->
+  <!-- ══ MAIN ═════════════════════════════════════════════════════════════ -->
   <main>
     <slot />
   </main>
 
-  <!-- Footer -->
+  <!-- ══ FOOTER ═══════════════════════════════════════════════════════════ -->
   <footer class="bg-primary-900 text-white mt-12">
     <div class="max-w-5xl mx-auto px-4 py-8">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+
         <div>
-          <h3 class="font-bold text-primary-300 mb-3">المدن الرئيسية</h3>
+          <h3 class="font-bold text-primary-300 mb-3 text-sm">المدن الرئيسية</h3>
           <ul class="space-y-1 text-sm text-gray-300">
             {mainCities.map(city => (
-              <li><a href={`/${city.id}`} class="hover:text-white transition-colors">{city.nameAr}</a></li>
+              <li>
+                <a href={u(city.id)} class="hover:text-white transition-colors">{city.nameAr}</a>
+              </li>
             ))}
           </ul>
         </div>
+
         <div>
-          <h3 class="font-bold text-primary-300 mb-3">مدن أخرى</h3>
+          <h3 class="font-bold text-primary-300 mb-3 text-sm">مدن أخرى</h3>
           <ul class="space-y-1 text-sm text-gray-300">
-            {cities.filter(c => !mainCities.includes(c)).map(city => (
-              <li><a href={`/${city.id}`} class="hover:text-white transition-colors">{city.nameAr}</a></li>
+            {cities.filter(c => !mainCities.find(m => m.id === c.id)).map(city => (
+              <li>
+                <a href={u(city.id)} class="hover:text-white transition-colors">{city.nameAr}</a>
+              </li>
             ))}
           </ul>
         </div>
+
         <div>
-          <h3 class="font-bold text-primary-300 mb-3">أوقات الصلاة</h3>
-          <ul class="space-y-1 text-sm text-gray-300">
-            <li><a href="/maghrib" class="hover:text-white transition-colors">موعد أذان المغرب</a></li>
-            <li><a href="/ramadan" class="hover:text-white transition-colors">أوقات صلاة رمضان</a></li>
+          <h3 class="font-bold text-primary-300 mb-3 text-sm">أوقات الصلاة</h3>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href={u('maghrib')} class="hover:text-white transition-colors">موعد أذان المغرب</a></li>
+            <li><a href={u('ramadan')} class="hover:text-white transition-colors">أوقات صلاة رمضان</a></li>
+            <li><a href={u('dubai')} class="hover:text-white transition-colors">مواقيت الصلاة دبي</a></li>
+            <li><a href={u('abu-dhabi')} class="hover:text-white transition-colors">مواقيت الصلاة أبوظبي</a></li>
           </ul>
         </div>
+
         <div>
-          <h3 class="font-bold text-primary-300 mb-3">عن الموقع</h3>
-          <ul class="space-y-1 text-sm text-gray-300">
-            <li><a href="/about" class="hover:text-white transition-colors">عن الموقع</a></li>
-            <li><a href="/privacy" class="hover:text-white transition-colors">سياسة الخصوصية</a></li>
+          <h3 class="font-bold text-primary-300 mb-3 text-sm">معلومات</h3>
+          <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href={u('about')} class="hover:text-white transition-colors">عن الموقع</a></li>
+            <li><a href={u('privacy')} class="hover:text-white transition-colors">سياسة الخصوصية</a></li>
           </ul>
-          <p class="text-xs text-gray-400 mt-3">طريقة الحساب:<br/>رابطة العالم الإسلامي</p>
+          <p class="text-xs text-gray-400 mt-4 leading-relaxed">
+            طريقة الحساب:<br/>
+            رابطة العالم الإسلامي<br/>
+            UTC+4 (توقيت الإمارات)
+          </p>
         </div>
+
       </div>
-      <div class="border-t border-primary-700 pt-4 text-center text-sm text-gray-400">
-        <p>© {new Date().getFullYear()} مواقيت الصلاة في الإمارات — جميع الحقوق محفوظة</p>
-        <p class="mt-1 text-xs">أوقات الصلاة محسوبة وفق طريقة رابطة العالم الإسلامي</p>
+      <div class="border-t border-primary-700 pt-4 text-center text-sm text-gray-400 space-y-1">
+        <p>© {new Date().getFullYear()} مواقيت الصلاة في الإمارات</p>
+        <p class="text-xs">أوقات الصلاة محسوبة وفق طريقة رابطة العالم الإسلامي</p>
       </div>
     </div>
   </footer>
 
-  <!-- Mobile nav toggle script -->
+  <!-- Mobile menu script -->
   <script>
-    const btn = document.getElementById('nav-toggle');
-    const menu = document.getElementById('mobile-menu');
-    btn?.addEventListener('click', () => {
-      menu?.classList.toggle('hidden');
-    });
+    (function () {
+      const btn = document.getElementById('nav-toggle') as HTMLButtonElement | null;
+      const menu = document.getElementById('mobile-menu') as HTMLElement | null;
+      const iconOpen = document.getElementById('icon-open') as HTMLElement | null;
+      const iconClose = document.getElementById('icon-close') as HTMLElement | null;
+
+      if (!btn || !menu) return;
+
+      btn.addEventListener('click', () => {
+        const isOpen = !menu.classList.contains('hidden');
+        menu.classList.toggle('hidden', isOpen);
+        if (iconOpen) iconOpen.classList.toggle('hidden', !isOpen);
+        if (iconClose) iconClose.classList.toggle('hidden', isOpen);
+        btn.setAttribute('aria-expanded', String(!isOpen));
+      });
+
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!btn.contains(e.target as Node) && !menu.contains(e.target as Node)) {
+          menu.classList.add('hidden');
+          iconOpen?.classList.remove('hidden');
+          iconClose?.classList.add('hidden');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
   </script>
 
 </body>

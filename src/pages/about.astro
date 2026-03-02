@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import { u } from '../utils/url';
+
+const title = 'عن موقع مواقيت الصلاة في الإمارات';
+const description = 'معلومات عن موقع مواقيت الصلاة الإمارات — طريقة حساب الأوقات، الدقة، والمصادر المعتمدة.';
+---
+
+<Base title={title} description={description} canonical="/about" cityName="عن الموقع">
+  <div class="max-w-3xl mx-auto px-4 py-8">
+    <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-6">عن موقع مواقيت الصلاة</h1>
+
+    <div class="space-y-6 text-gray-700 text-sm leading-relaxed">
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">🕌 عن الموقع</h2>
+        <p>
+          موقع <strong>مواقيت الصلاة في الإمارات</strong> يوفر أوقات الصلاة الخمس لجميع مدن
+          الإمارات العربية المتحدة، محسوبةً بدقة عالية بناءً على الإحداثيات الجغرافية لكل مدينة.
+        </p>
+        <p class="mt-2">
+          الهدف الأساسي للموقع هو تمكين المسلمين في الإمارات من معرفة مواقيت صلاتهم بسهولة
+          وسرعة على أجهزة الجوال والحاسوب.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">📐 طريقة الحساب</h2>
+        <p>
+          تُحسب أوقات الصلاة وفق طريقة <strong>رابطة العالم الإسلامي (MWL)</strong> المعتمدة
+          رسمياً في دول الخليج العربي والإمارات، بالإعدادات التالية:
+        </p>
+        <ul class="mt-3 space-y-1 list-disc list-inside text-gray-600">
+          <li>زاوية الفجر: 18 درجة</li>
+          <li>زاوية العشاء: 17 درجة</li>
+          <li>طريقة حساب العصر: الشافعي (الظل الأول)</li>
+          <li>المغرب: غروب الشمس مباشرة (0.833 درجة)</li>
+          <li>المنطقة الزمنية: UTC+4 (توقيت الإمارات)</li>
+        </ul>
+        <p class="mt-3 text-xs text-gray-500">
+          قد يكون هناك فارق دقيقة إلى دقيقتين عن الأوقات الرسمية الصادرة عن
+          وزارة الشؤون الإسلامية والأوقاف في الإمارات.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">🏙️ المدن المتاحة</h2>
+        <p>يغطي الموقع حالياً جميع الإمارات السبع وأبرز مدنها:</p>
+        <div class="mt-3 grid grid-cols-2 sm:grid-cols-3 gap-1 text-xs text-gray-600">
+          {[
+            'دبي', 'أبوظبي', 'الشارقة', 'عجمان', 'العين', 'رأس الخيمة',
+            'الفجيرة', 'أم القيوين', 'خورفكان', 'كلباء', 'دبا الحصن',
+            'الخور', 'ضبا', 'مسافي', 'هيلي', 'دلما'
+          ].map(city => (
+            <span class="py-1 px-2 bg-gray-50 rounded">{city}</span>
+          ))}
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">📱 مميزات الموقع</h2>
+        <ul class="space-y-2 list-disc list-inside text-gray-600">
+          <li>عرض الصلوات الخمس مع العد التنازلي للصلاة القادمة</li>
+          <li>جدول شهري كامل لأوقات الصلاة</li>
+          <li>اتجاه القبلة والمسافة إلى مكة المكرمة</li>
+          <li>صفحة مخصصة لأوقات رمضان (السحور والإفطار)</li>
+          <li>تحديد الموقع الجغرافي التلقائي</li>
+          <li>تصميم متوافق مع الجوال بالكامل</li>
+        </ul>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-5">
+        <h2 class="text-lg font-bold text-gray-800 mb-3">📬 تواصل معنا</h2>
+        <p>
+          لأي استفسار أو ملاحظة بخصوص دقة الأوقات أو اقتراح تحسينات،
+          يسعدنا تلقي ملاحظاتكم عبر صفحة GitHub الخاصة بالمشروع.
+        </p>
+      </div>
+
+      <div class="text-center text-sm text-gray-500 pt-2">
+        <a href={u('')} class="text-primary-600 hover:underline">← العودة للرئيسية</a>
+      </div>
+
+    </div>
+  </div>
+</Base>
