@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # Rebuild daily at 20:01 UTC = 00:01 UAE (UTC+4)
+    # This keeps meta descriptions and page titles fresh every day
+    - cron: '1 20 * * *'
 
 permissions:
   contents: read
