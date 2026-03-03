@@ -1,0 +1,194 @@
+---
+import Base from '../../layouts/Base.astro';
+import FAQ from '../../components/FAQ.astro';
+import { u } from '../../utils/url';
+
+const title = 'أركان الصلاة وشروطها — دليل كامل للصلاة الصحيحة';
+const description = 'تعرّف على أركان الصلاة السبعة وشروطها، خطوة بخطوة من النية إلى التسليم. مع أوقات الصلوات الخمس في الإمارات.';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  inLanguage: 'ar',
+  datePublished: '2025-03-02',
+  dateModified: '2025-03-02',
+  author: { '@type': 'Organization', name: 'timeofpray.net' },
+  publisher: { '@type': 'Organization', name: 'timeofpray.net', url: 'https://timeofpray.net' },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: import.meta.env.SITE },
+    { '@type': 'ListItem', position: 2, name: 'المقالات', item: `${import.meta.env.SITE}blog` },
+    { '@type': 'ListItem', position: 3, name: 'أركان الصلاة', item: `${import.meta.env.SITE}blog/arkan-al-salah` },
+  ],
+};
+
+const faqItems = [
+  {
+    q: 'ما هي أركان الصلاة؟',
+    a: 'أركان الصلاة هي: النية، تكبيرة الإحرام، القيام مع القدرة، قراءة الفاتحة، الركوع، السجود (مرتان في كل ركعة)، الجلسة بين السجدتين، الطمأنينة في الأركان، الترتيب بين الأركان، التشهد الأخير، الجلوس له، والتسليمتان.',
+  },
+  {
+    q: 'ما الفرق بين أركان الصلاة وواجباتها وسننها؟',
+    a: 'الأركان: لا تصح الصلاة إلا بها ولا تجبر بسجود السهو. الواجبات: إن نُسيت عمداً بطلت الصلاة، وإن نُسيت سهواً جُبرت بسجود السهو. السنن: يُثاب فاعلها ولا يُعاقب تاركها ولا تبطل الصلاة بتركها.',
+  },
+  {
+    q: 'هل يجوز إسقاط القيام في الصلاة؟',
+    a: 'القيام ركن في الفريضة لمن قدر عليه. من عجز عن القيام لمرض أو كبر سن جاز له الصلاة قاعداً، فإن عجز عن القعود صلى على جنبه، وإن لم يستطع فبالإيماء.',
+  },
+  {
+    q: 'ما هي شروط صحة الصلاة قبل الدخول فيها؟',
+    a: 'شروط صحة الصلاة: الطهارة من الحدثين (الوضوء أو الغسل عند الحاجة)، طهارة البدن والثوب والمكان، ستر العورة، استقبال القبلة، دخول الوقت، والنية.',
+  },
+  {
+    q: 'ماذا أفعل إذا نسيت ركناً من أركان الصلاة؟',
+    a: 'إن تذكرت نسيان ركن وأنت لا تزال في الصلاة، عُدت إليه وأتممت ما بعده. إن تذكرته بعد السلام وكان الوقت قريباً أعدت الصلاة. وسجود السهو لا يجبر الأركان — الأركان لا بد من إتيانها.',
+  },
+];
+---
+
+<Base title={title} description={description} canonical="/blog/arkan-al-salah" cityName="أركان الصلاة" schema={[articleSchema, breadcrumbSchema]}>
+  <article class="max-w-3xl mx-auto px-4 py-8">
+
+    <header class="mb-8">
+      <div class="flex flex-wrap gap-2 mb-3">
+        {['أركان الصلاة', 'كيفية الصلاة', 'فقه الصلاة'].map(tag => (
+          <span class="text-xs bg-primary-50 text-primary-700 px-2 py-0.5 rounded-full">{tag}</span>
+        ))}
+      </div>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-3">
+        أركان الصلاة وشروطها — دليل كامل للصلاة الصحيحة
+      </h1>
+      <p class="text-gray-500 text-sm">⏱ 10 دقائق قراءة · نُشر في مارس 2025</p>
+    </header>
+
+    <div class="space-y-6 text-gray-700 text-sm leading-relaxed">
+
+      <div class="bg-primary-50 border-r-4 border-primary-500 rounded-xl p-4 text-base text-gray-800 leading-relaxed">
+        قال رسول الله ﷺ: <strong>«صلوا كما رأيتموني أصلي»</strong> [رواه البخاري]
+      </div>
+
+      <p>
+        الصلاة عمود الدين، وهي أول ما يُحاسَب عنه العبد يوم القيامة. ولكي تكون الصلاة
+        صحيحة ومقبولة، لا بد أن تستوفي شروطها وأركانها. هذا الدليل يشرح كل ما تحتاج
+        معرفته بطريقة مبسّطة ومنظمة.
+      </p>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-4">أولاً: شروط صحة الصلاة</h2>
+        <p class="mb-3">هي الأمور الواجب توافرها <strong>قبل</strong> الدخول في الصلاة:</p>
+        <div class="space-y-2">
+          {[
+            { n: '1', title: 'الطهارة', desc: 'الوضوء من الحدث الأصغر، والغسل من الجنابة والحيض والنفاس. بدون طهارة لا صلاة.' },
+            { n: '2', title: 'طهارة الثوب والبدن والمكان', desc: 'يجب أن تكون ملابسك وجسمك ومكان صلاتك نظيفاً من النجاسات.' },
+            { n: '3', title: 'ستر العورة', desc: 'عورة الرجل من السرة إلى الركبة، والمرأة جسمها كله ما عدا الوجه والكفين (في الصلاة).' },
+            { n: '4', title: 'استقبال القبلة', desc: 'التوجه نحو الكعبة المشرفة. استخدم بوصلة القبلة على صفحة كل مدينة في موقعنا.' },
+            { n: '5', title: 'دخول الوقت', desc: 'لا تصح صلاة قبل وقتها. ابدأ الصلاة بعد الأذان وتأكد من الوقت.' },
+            { n: '6', title: 'النية', desc: 'العزم الجازم في القلب على أداء الصلاة المعينة. ولا يشترط التلفظ بها.' },
+          ].map(item => (
+            <div class="flex gap-3 p-3 bg-gray-50 rounded-xl border border-gray-100">
+              <span class="w-7 h-7 bg-primary-600 text-white rounded-full text-sm font-bold flex items-center justify-center flex-shrink-0">{item.n}</span>
+              <div>
+                <p class="font-semibold text-gray-800">{item.title}</p>
+                <p class="text-gray-600 text-xs mt-0.5">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-4">ثانياً: أركان الصلاة</h2>
+        <p class="mb-3">
+          الأركان هي مكوّنات الصلاة الأساسية التي <strong>لا تصح الصلاة إلا بها</strong>.
+          تركها عمداً أو سهواً يبطل الصلاة ولا يجبرها سجود السهو.
+        </p>
+
+        <div class="space-y-3">
+          {[
+            { n: '1', title: 'تكبيرة الإحرام', icon: '🔊', desc: 'قول "الله أكبر" في بداية الصلاة، وهي المدخل الذي تنعقد به الصلاة. لا تصح الصلاة بدونها.' },
+            { n: '2', title: 'القيام مع القدرة', icon: '🧍', desc: 'الوقوف منتصباً في الفريضة. من عجز قعد، ومن عجز اضطجع، ومن عجز أومأ.' },
+            { n: '3', title: 'قراءة الفاتحة', icon: '📖', desc: 'قراءتها ركن في كل ركعة، لقوله ﷺ: «لا صلاة لمن لم يقرأ بفاتحة الكتاب». والمأموم يقرأها خلف الإمام في الأصح.' },
+            { n: '4', title: 'الركوع', icon: '🙇', desc: 'الانحناء بحيث تصل راحتا اليدين إلى الركبتين مع الطمأنينة. والقدر الواجب أن يصل الكفان الركبتين.' },
+            { n: '5', title: 'الاعتدال من الركوع', icon: '🧍', desc: 'الرفع من الركوع حتى الاستواء قائماً، وهو ركن مستقل فلا يجوز تركه.' },
+            { n: '6', title: 'السجود مرتين', icon: '🕌', desc: 'السجود على الأعضاء السبعة (الجبهة مع الأنف، الكفان، الركبتان، أطراف القدمين). والسجدة الثانية ركن مستقل.' },
+            { n: '7', title: 'الجلوس بين السجدتين', icon: '🧎', desc: 'الجلوس على الأرض بين السجدة الأولى والثانية مع الطمأنينة، وهو ركن في ذاته.' },
+            { n: '8', title: 'الطمأنينة في كل ركن', icon: '⏸️', desc: 'البقاء في كل ركن مقداراً من الزمن لا يقل عن وقف مستقر. النقر السريع دون طمأنينة لا يصح.' },
+            { n: '9', title: 'التشهد الأخير', icon: '🤲', desc: 'قراءة التشهد في الجلوس الأخير، وهو ركن لا تتم الصلاة بدونه.' },
+            { n: '10', title: 'الصلاة الإبراهيمية', icon: '🤲', desc: 'الصلاة على النبي ﷺ في التشهد الأخير: "اللهم صل على محمد وعلى آل محمد...".' },
+            { n: '11', title: 'التسليمتان', icon: '👋', desc: 'قول "السلام عليكم ورحمة الله" يميناً ثم شمالاً، وهما ركنان يُخرجان من الصلاة.' },
+            { n: '12', title: 'الترتيب', icon: '🔢', desc: 'أداء الأركان بترتيبها المشروع، فلو قدّم السجود على الركوع بطلت الصلاة.' },
+          ].map(item => (
+            <div class="flex gap-3 p-3 bg-white rounded-xl border border-gray-200 shadow-sm">
+              <span class="w-7 h-7 bg-primary-50 text-primary-700 rounded-full text-sm font-bold flex items-center justify-center flex-shrink-0">{item.n}</span>
+              <div>
+                <p class="font-semibold text-gray-800 flex items-center gap-1.5">{item.icon} {item.title}</p>
+                <p class="text-gray-600 text-xs mt-0.5">{item.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">ثالثاً: واجبات الصلاة</h2>
+        <p>
+          الواجبات هي أمور تجب في الصلاة، وإن تُركت سهواً جُبرت بسجود السهو، وإن تُركت
+          عمداً بطلت الصلاة في الراجح. ومنها:
+        </p>
+        <ul class="mt-3 space-y-1 list-disc list-inside text-gray-600">
+          <li>التكبيرات الانتقالية (غير تكبيرة الإحرام)</li>
+          <li>قول "سمع الله لمن حمده" للإمام والمنفرد عند الرفع من الركوع</li>
+          <li>قول "ربنا ولك الحمد" للجميع</li>
+          <li>قول "سبحان ربي العظيم" مرة في الركوع</li>
+          <li>قول "سبحان ربي الأعلى" مرة في السجود</li>
+          <li>قول "رب اغفر لي" بين السجدتين</li>
+          <li>التشهد الأول والجلوس له في الصلاة الرباعية والثلاثية</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">تحقق من أوقات الصلاة في مدينتك</h2>
+        <p>
+          الآن بعد أن عرفت كيف تصلي، تأكد من أوقات الصلاة الصحيحة في مدينتك في الإمارات:
+        </p>
+        <div class="flex flex-wrap gap-2 mt-3">
+          {[
+            { city: 'دبي', href: 'dubai' },
+            { city: 'أبوظبي', href: 'abu-dhabi' },
+            { city: 'الشارقة', href: 'sharjah' },
+            { city: 'عجمان', href: 'ajman' },
+            { city: 'رأس الخيمة', href: 'ras-al-khaimah' },
+            { city: 'الفجيرة', href: 'fujairah' },
+          ].map(item => (
+            <a href={u(item.href)} class="bg-primary-50 text-primary-700 border border-primary-200 px-3 py-1.5 rounded-lg text-sm hover:bg-primary-100 transition-colors">
+              {item.city}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <div class="mt-8">
+        <FAQ items={faqItems} />
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-200">
+        <h2 class="text-base font-bold text-gray-800 mb-3">مقالات ذات صلة</h2>
+        <div class="flex flex-wrap gap-2">
+          <a href={u('blog/salat-al-jumua')} class="text-sm text-primary-600 hover:underline">صلاة الجمعة</a>
+          <span class="text-gray-300">·</span>
+          <a href={u('blog/salat-al-fajr')} class="text-sm text-primary-600 hover:underline">صلاة الفجر</a>
+          <span class="text-gray-300">·</span>
+          <a href={u('maghrib')} class="text-sm text-primary-600 hover:underline">موعد أذان المغرب اليوم</a>
+        </div>
+        <a href={u('blog')} class="inline-block mt-4 text-sm text-gray-500 hover:text-primary-600">← جميع المقالات</a>
+      </div>
+
+    </div>
+  </article>
+</Base>

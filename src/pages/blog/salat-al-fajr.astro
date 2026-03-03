@@ -1,0 +1,211 @@
+---
+import Base from '../../layouts/Base.astro';
+import FAQ from '../../components/FAQ.astro';
+import { u } from '../../utils/url';
+
+const title = 'صلاة الفجر — وقتها وفضلها وأسرار المحافظة عليها';
+const description = 'كل ما تحتاج معرفته عن صلاة الفجر: متى تبدأ وتنتهي، فضائلها في القرآن والسنة، وأوقات الفجر في مدن الإمارات.';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  inLanguage: 'ar',
+  datePublished: '2025-03-03',
+  dateModified: '2025-03-03',
+  author: { '@type': 'Organization', name: 'timeofpray.net' },
+  publisher: { '@type': 'Organization', name: 'timeofpray.net', url: 'https://timeofpray.net' },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: import.meta.env.SITE },
+    { '@type': 'ListItem', position: 2, name: 'المقالات', item: `${import.meta.env.SITE}blog` },
+    { '@type': 'ListItem', position: 3, name: 'صلاة الفجر', item: `${import.meta.env.SITE}blog/salat-al-fajr` },
+  ],
+};
+
+const faqItems = [
+  {
+    q: 'متى يبدأ وقت صلاة الفجر وحتى متى يمتد؟',
+    a: 'يبدأ وقت صلاة الفجر من طلوع الفجر الصادق (الضوء المنتشر في الأفق) وينتهي بطلوع الشمس. وهذا يعني أنك تملك نحو 60-90 دقيقة للصلاة. في الإمارات يتراوح وقت الفجر بين الساعة 4:30 صباحاً في الصيف و5:45 في الشتاء.',
+  },
+  {
+    q: 'كم عدد ركعات صلاة الفجر؟',
+    a: 'صلاة الفجر ركعتان فريضة، وقبلها ركعتا سنة الفجر (راتبة الفجر) التي قال عنها النبي ﷺ: «ركعتا الفجر خير من الدنيا وما فيها».',
+  },
+  {
+    q: 'هل يجوز قضاء صلاة الفجر بعد الشروق؟',
+    a: 'نعم، من نام عن صلاة الفجر أو نسيها قضاها متى ذكرها، ولا إثم عليه في النوم أو النسيان. قال ﷺ: «من نام عن صلاة أو نسيها فليصلها إذا ذكرها». ويُستحب أن يصليها ركعتين راتبة ثم الفريضة.',
+  },
+  {
+    q: 'ما الفرق بين الفجر الكاذب والفجر الصادق؟',
+    a: 'الفجر الكاذب هو بياض يظهر في الأفق ثم تعقبه ظلمة، ويشبه ذنب السرحان (منتصب). أما الفجر الصادق فهو الضوء المنتشر أفقياً في السماء (كالذنب الممتد)، وعنده يدخل وقت الصلاة وينقطع السحور.',
+  },
+  {
+    q: 'لماذا صلاة الفجر أصعب الصلوات مواظبةً؟',
+    a: 'لأنها تُصلَّى في وقت النوم الثقيل آخر الليل. وقد أشار النبي ﷺ إلى ذلك بقوله: «يعقد الشيطان على قافية رأس أحدكم إذا هو نام ثلاث عُقَد». ولذلك فضلها عظيم جداً لمن يحافظ عليها.',
+  },
+];
+---
+
+<Base title={title} description={description} canonical="/blog/salat-al-fajr" cityName="صلاة الفجر" schema={[articleSchema, breadcrumbSchema]}>
+  <article class="max-w-3xl mx-auto px-4 py-8">
+
+    <header class="mb-8">
+      <div class="flex flex-wrap gap-2 mb-3">
+        {['صلاة الفجر', 'فضل الصلاة', 'أوقات الصلاة'].map(tag => (
+          <span class="text-xs bg-primary-50 text-primary-700 px-2 py-0.5 rounded-full">{tag}</span>
+        ))}
+      </div>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-3">
+        صلاة الفجر — وقتها وفضلها وأسرار المحافظة عليها
+      </h1>
+      <p class="text-gray-500 text-sm">⏱ 7 دقائق قراءة · نُشر في مارس 2025</p>
+    </header>
+
+    <div class="space-y-6 text-gray-700 text-sm leading-relaxed">
+
+      <div class="bg-primary-50 border-r-4 border-primary-500 rounded-xl p-4 text-base text-gray-800 leading-relaxed">
+        قال الله تعالى: <strong>﴿وَقُرْآنَ الْفَجْرِ ۖ إِنَّ قُرْآنَ الْفَجْرِ كَانَ مَشْهُودًا﴾</strong> [الإسراء: 78]
+      </div>
+
+      <p>
+        صلاة الفجر هي أولى الصلوات الخمس في اليوم، وهي أثقلها على النفس وأعظمها أجراً.
+        تُصلَّى في وقت يكون فيه معظم الناس نياماً، فمن حافظ عليها فقد فاز بفضل عظيم
+        وأثبت إيماناً راسخاً. هذا المقال يشرح كل ما يتعلق بصلاة الفجر.
+      </p>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">وقت صلاة الفجر في الإمارات</h2>
+        <p>
+          يبدأ وقت الفجر من طلوع <strong>الفجر الصادق</strong> — وهو البياض المنتشر أفقياً في
+          السماء — وينتهي بشروق الشمس. وهذا يُتيح للمصلي نحو ساعة إلى ساعة ونصف للصلاة.
+        </p>
+        <div class="bg-gray-50 rounded-xl p-4 mt-3 text-xs">
+          <p class="font-semibold text-gray-800 mb-2">تقريب وقت الفجر في الإمارات حسب الفصل:</p>
+          <div class="grid grid-cols-2 gap-2">
+            {[
+              { season: 'يناير (الشتاء)', time: '5:30 — 6:50 ص' },
+              { season: 'أبريل (الربيع)', time: '4:45 — 6:10 ص' },
+              { season: 'يوليو (الصيف)', time: '4:20 — 5:55 ص' },
+              { season: 'أكتوبر (الخريف)', time: '4:55 — 6:15 ص' },
+            ].map(row => (
+              <div class="bg-white rounded-lg p-2 border border-gray-200">
+                <p class="font-medium text-gray-700">{row.season}</p>
+                <p class="text-primary-600 font-bold">{row.time}</p>
+              </div>
+            ))}
+          </div>
+          <p class="text-gray-500 mt-2">* الأوقات تقريبية لمدينة دبي. تتباين دقائق بين المدن.</p>
+        </div>
+        <div class="flex flex-wrap gap-2 mt-3">
+          {[
+            { city: 'دبي', href: 'dubai' },
+            { city: 'أبوظبي', href: 'abu-dhabi' },
+            { city: 'الشارقة', href: 'sharjah' },
+            { city: 'رأس الخيمة', href: 'ras-al-khaimah' },
+            { city: 'الفجيرة', href: 'fujairah' },
+          ].map(item => (
+            <a href={u(item.href)} class="bg-primary-50 text-primary-700 border border-primary-200 px-3 py-1.5 rounded-lg text-sm hover:bg-primary-100 transition-colors">
+              الفجر في {item.city}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">فضائل صلاة الفجر في القرآن والسنة</h2>
+        <div class="space-y-3">
+          <div class="flex gap-3 p-3 bg-amber-50 rounded-xl border border-amber-100">
+            <span class="text-2xl flex-shrink-0">📖</span>
+            <div>
+              <p class="font-semibold text-amber-900 text-xs mb-1">القرآن الكريم</p>
+              <p class="text-amber-800 text-xs">قال تعالى: ﴿وَقُرْآنَ الْفَجْرِ إِنَّ قُرْآنَ الْفَجْرِ كَانَ مَشْهُودًا﴾ — يشهده ملائكة الليل وملائكة النهار.</p>
+            </div>
+          </div>
+          {[
+            { hadith: '«من صلى الفجر في جماعة فهو في ذمة الله حتى الليل»', source: 'رواه مسلم' },
+            { hadith: '«من صلى البَرْدَين دخل الجنة» — والبردان هما الفجر والعصر', source: 'رواه البخاري' },
+            { hadith: '«ركعتا الفجر خير من الدنيا وما فيها»', source: 'رواه مسلم — في سنة الفجر' },
+            { hadith: '«لو يعلمون ما في الصبح والعشاء لأتوهما ولو حبواً»', source: 'رواه البخاري ومسلم' },
+          ].map(item => (
+            <div class="flex gap-3 p-3 bg-white rounded-xl border border-gray-200">
+              <span class="text-2xl flex-shrink-0">💬</span>
+              <div>
+                <p class="text-gray-800 text-xs leading-relaxed">{item.hadith}</p>
+                <p class="text-gray-400 text-xs mt-1">{item.source}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">كم ركعة صلاة الفجر؟</h2>
+        <p>صلاة الفجر تتكون من:</p>
+        <div class="mt-3 space-y-2">
+          <div class="flex gap-3 p-3 bg-primary-50 rounded-xl">
+            <span class="font-bold text-primary-600 w-20 flex-shrink-0">سنة الفجر</span>
+            <p class="text-gray-700 text-xs">ركعتان خفيفتان قبل الفريضة — من أهم السنن الرواتب وأشدها تأكيداً. قال ﷺ: «ركعتا الفجر خير من الدنيا وما فيها».</p>
+          </div>
+          <div class="flex gap-3 p-3 bg-primary-100 rounded-xl">
+            <span class="font-bold text-primary-700 w-20 flex-shrink-0">الفريضة</span>
+            <p class="text-gray-700 text-xs">ركعتان جهريتان (يجهر بالقراءة فيهما). يُستحب إطالة القراءة فيهما أكثر من غيرهما من الصلوات.</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">الفجر ورمضان — وقت السحور</h2>
+        <p>
+          الفجر له أهمية مضاعفة في رمضان، لأنه الحد الفاصل بين السحور والإمساك.
+          قال تعالى: <strong>﴿وَكُلُوا وَاشْرَبُوا حَتَّىٰ يَتَبَيَّنَ لَكُمُ الْخَيْطُ الْأَبْيَضُ مِنَ الْخَيْطِ الْأَسْوَدِ مِنَ الْفَجْرِ﴾</strong>.
+        </p>
+        <p class="mt-2">
+          أي أن وقت السحور ينتهي بأذان الفجر. لمعرفة وقت السحور والإفطار في الإمارات،
+          راجع <a href={u('ramadan')} class="text-primary-600 hover:underline font-medium">صفحة مواقيت رمضان</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">نصائح للمحافظة على صلاة الفجر</h2>
+        <div class="grid sm:grid-cols-2 gap-2 mt-2">
+          {[
+            { icon: '⏰', text: 'اضبط منبهاً قبل أذان الفجر بـ 10 دقائق' },
+            { icon: '🌙', text: 'نم مبكراً وتجنب السهر حتى وقت متأخر' },
+            { icon: '🤲', text: 'ادعُ الله قبل النوم أن يوقظك للفجر' },
+            { icon: '💧', text: 'اغسل وجهك بالماء البارد عند الاستيقاظ' },
+            { icon: '📱', text: 'فعّل إشعارات الأذان في تطبيق مناسب' },
+            { icon: '🕌', text: 'الصلاة في المسجد مع الجماعة تُعينك على المواظبة' },
+          ].map(item => (
+            <div class="flex gap-2 items-center bg-gray-50 rounded-lg p-2.5 text-sm">
+              <span class="text-lg">{item.icon}</span>
+              <span class="text-gray-700">{item.text}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div class="mt-8">
+        <FAQ items={faqItems} />
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-200">
+        <h2 class="text-base font-bold text-gray-800 mb-3">مقالات ذات صلة</h2>
+        <div class="flex flex-wrap gap-2">
+          <a href={u('blog/arkan-al-salah')} class="text-sm text-primary-600 hover:underline">أركان الصلاة</a>
+          <span class="text-gray-300">·</span>
+          <a href={u('blog/salat-al-isha')} class="text-sm text-primary-600 hover:underline">صلاة العشاء</a>
+          <span class="text-gray-300">·</span>
+          <a href={u('ramadan')} class="text-sm text-primary-600 hover:underline">مواقيت رمضان</a>
+        </div>
+        <a href={u('blog')} class="inline-block mt-4 text-sm text-gray-500 hover:text-primary-600">← جميع المقالات</a>
+      </div>
+
+    </div>
+  </article>
+</Base>

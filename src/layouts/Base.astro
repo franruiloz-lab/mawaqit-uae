@@ -121,6 +121,9 @@ const base = import.meta.env.BASE_URL;
         <a href={u('ramadan')} class={`px-2 py-1 rounded hover:bg-primary-700 transition-colors min-h-0 h-auto ${cityId === 'ramadan' ? 'bg-primary-800 font-semibold' : ''}`}>
           رمضان
         </a>
+        <a href={u('blog')} class="px-2 py-1 rounded hover:bg-primary-700 transition-colors min-h-0 h-auto">
+          المقالات
+        </a>
       </nav>
 
       <!-- Mobile toggle button -->
@@ -152,9 +155,10 @@ const base = import.meta.env.BASE_URL;
           </a>
         ))}
       </div>
-      <div class="max-w-5xl mx-auto px-4 pb-3 grid grid-cols-2 gap-1 text-sm text-center border-t border-primary-600 pt-2">
+      <div class="max-w-5xl mx-auto px-4 pb-3 grid grid-cols-3 gap-1 text-sm text-center border-t border-primary-600 pt-2">
         <a href={u('maghrib')} class="py-2 rounded hover:bg-primary-600 transition-colors">🌇 أذان المغرب</a>
         <a href={u('ramadan')} class="py-2 rounded hover:bg-primary-600 transition-colors">🌙 رمضان</a>
+        <a href={u('blog')} class="py-2 rounded hover:bg-primary-600 transition-colors">📖 المقالات</a>
       </div>
     </div>
   </header>
@@ -215,6 +219,7 @@ const base = import.meta.env.BASE_URL;
         <div>
           <h3 class="font-bold text-primary-300 mb-3 text-sm">معلومات</h3>
           <ul class="space-y-2 text-sm text-gray-300">
+            <li><a href={u('blog')} class="hover:text-white transition-colors">المقالات</a></li>
             <li><a href={u('about')} class="hover:text-white transition-colors">عن الموقع</a></li>
             <li><a href={u('privacy')} class="hover:text-white transition-colors">سياسة الخصوصية</a></li>
             <li><a href={u('terms')} class="hover:text-white transition-colors">شروط الاستخدام</a></li>

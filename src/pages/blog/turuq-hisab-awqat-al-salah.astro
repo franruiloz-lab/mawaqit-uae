@@ -1,0 +1,208 @@
+---
+import Base from '../../layouts/Base.astro';
+import FAQ from '../../components/FAQ.astro';
+import { u } from '../../utils/url';
+
+const title = 'طرق حساب أوقات الصلاة — لماذا تختلف المواقيت بين التطبيقات؟';
+const description = 'شرح مبسّط لطرق حساب أوقات الصلاة (رابطة العالم الإسلامي، ISNA، الأزهر) والسبب وراء اختلاف المواقيت بين دبي وأبوظبي.';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  inLanguage: 'ar',
+  datePublished: '2025-03-06',
+  dateModified: '2025-03-06',
+  author: { '@type': 'Organization', name: 'timeofpray.net' },
+  publisher: { '@type': 'Organization', name: 'timeofpray.net', url: 'https://timeofpray.net' },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: import.meta.env.SITE },
+    { '@type': 'ListItem', position: 2, name: 'المقالات', item: `${import.meta.env.SITE}blog` },
+    { '@type': 'ListItem', position: 3, name: 'طرق الحساب', item: `${import.meta.env.SITE}blog/turuq-hisab-awqat-al-salah` },
+  ],
+};
+
+const faqItems = [
+  {
+    q: 'أي طريقة حساب أوقات الصلاة هي الأصح؟',
+    a: 'لا توجد طريقة "أصح" بالمطلق، إذ تعتمد كل منطقة جغرافية على الطريقة المناسبة لخطوط العرض فيها. في الإمارات ودول الخليج تُعتمد طريقة رابطة العالم الإسلامي (MWL) ذات زاوية فجر 18° وعشاء 17°، وهي ما تعتمده الهيئة العامة للشؤون الإسلامية والأوقاف.',
+  },
+  {
+    q: 'لماذا يختلف وقت الأذان في موقعي عن موقع آخر؟',
+    a: 'السبب الرئيسي هو اختلاف خط العرض وخط الطول للموقع الجغرافي. كما قد يكون السبب اختلاف طريقة الحساب المعتمدة. موقع timeofpray.net يستخدم طريقة رابطة العالم الإسلامي وإحداثيات كل مدينة لضمان الدقة.',
+  },
+  {
+    q: 'ما هو الزوال وكيف يتحدد؟',
+    a: 'الزوال هو اللحظة التي تكون فيها الشمس في أعلى نقطة لها في السماء (التعامد أو "الذروة الشمسية"). يتحدد بدقيقة الذروة بحسب خط الطول والتاريخ، ويختلف من يوم لآخر بسبب حركة الأرض حول الشمس.',
+  },
+  {
+    q: 'ما الفرق بين طريقة الأزهر وطريقة رابطة العالم الإسلامي؟',
+    a: 'الأزهر يعتمد زاوية فجر 19.5° وعشاء 17.5°، بينما رابطة العالم الإسلامي تعتمد 18° للفجر و17° للعشاء. الفارق الناتج في وقت الفجر نحو 5-7 دقائق (الأزهر يُقدّم الفجر أكثر). كلا الطريقتين معتمدتان علمياً.',
+  },
+];
+---
+
+<Base title={title} description={description} canonical="/blog/turuq-hisab-awqat-al-salah" cityName="طرق حساب أوقات الصلاة" schema={[articleSchema, breadcrumbSchema]}>
+  <article class="max-w-3xl mx-auto px-4 py-8">
+
+    <header class="mb-8">
+      <div class="flex flex-wrap gap-2 mb-3">
+        {['حساب أوقات الصلاة', 'الفلك الإسلامي', 'طرق الحساب'].map(tag => (
+          <span class="text-xs bg-primary-50 text-primary-700 px-2 py-0.5 rounded-full">{tag}</span>
+        ))}
+      </div>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-3">
+        طرق حساب أوقات الصلاة — لماذا تختلف المواقيت بين التطبيقات؟
+      </h1>
+      <p class="text-gray-500 text-sm">⏱ 9 دقائق قراءة · نُشر في مارس 2025</p>
+    </header>
+
+    <div class="space-y-6 text-gray-700 text-sm leading-relaxed">
+
+      <p>
+        هل لاحظت يوماً أن وقت الأذان في تطبيق ما يختلف عن تطبيق آخر بدقيقتين أو ثلاث؟
+        أو أن وقت الفجر في دبي يختلف عن وقته في أبوظبي؟ هذا المقال يشرح
+        العلم الكامن وراء حساب مواقيت الصلاة بأسلوب مبسّط وواضح.
+      </p>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">الأساس الفلكي لأوقات الصلاة</h2>
+        <p>
+          أوقات الصلاة الإسلامية مرتبطة بمواضع الشمس بالنسبة للأفق:
+        </p>
+        <div class="space-y-2 mt-3">
+          {[
+            { prayer: 'الفجر', basis: 'ظهور الفجر الصادق — الشمس تحت الأفق بزاوية معينة' },
+            { prayer: 'الشروق', basis: 'لحظة ظهور حافة الشمس العليا من الأفق الشرقي' },
+            { prayer: 'الظهر', basis: 'زوال الشمس — وصولها ذروتها (التعامد) ثم ميلها غرباً' },
+            { prayer: 'العصر', basis: 'حين يبلغ ظل كل شيء ضعف طوله (أو مساويه) مضافاً لظل الزوال' },
+            { prayer: 'المغرب', basis: 'غروب الشمس — اختفاء حافتها العليا تحت الأفق الغربي' },
+            { prayer: 'العشاء', basis: 'غياب الشفق الأحمر — الشمس تحت الأفق بزاوية معينة' },
+          ].map(item => (
+            <div class="flex gap-3 p-2.5 bg-gray-50 rounded-lg">
+              <span class="font-bold text-primary-600 w-16 flex-shrink-0 text-sm">{item.prayer}</span>
+              <span class="text-gray-600 text-xs">{item.basis}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">الزوايا: سبب الاختلاف بين الطرق</h2>
+        <p>
+          الفجر والعشاء يُحسبان بناءً على <strong>زاوية انخفاض الشمس تحت الأفق</strong>.
+          هذه الزاوية هي مصدر الاختلاف بين طرق الحساب المختلفة. كلما كانت الزاوية أكبر،
+          كلما بدأ الفجر أبكر وانتهت العشاء أمتد.
+        </p>
+        <div class="mt-4 rounded-xl overflow-hidden border border-gray-200">
+          <div class="bg-primary-700 text-white px-4 py-2 text-xs font-bold grid grid-cols-4 gap-2">
+            <span>الطريقة</span>
+            <span class="text-center">زاوية الفجر</span>
+            <span class="text-center">زاوية العشاء</span>
+            <span class="text-center">المنطقة</span>
+          </div>
+          {[
+            { name: 'رابطة العالم الإسلامي (MWL) ★', fajr: '18°', isha: '17°', region: 'الإمارات والخليج' },
+            { name: 'هيئة الشمال الأمريكي (ISNA)', fajr: '15°', isha: '15°', region: 'أمريكا الشمالية' },
+            { name: 'الأزهر الشريف', fajr: '19.5°', isha: '17.5°', region: 'مصر وشمال أفريقيا' },
+            { name: 'رابطة الجاليات الإسلامية (UoIS)', fajr: '18°', isha: '90 دق', region: 'أوروبا' },
+            { name: 'هيئة الهند', fajr: '18°', isha: '18°', region: 'شبه القارة الهندية' },
+          ].map((row, i) => (
+            <div class={`grid grid-cols-4 gap-2 px-4 py-2.5 text-xs border-t border-gray-100 ${row.name.includes('★') ? 'bg-primary-50 font-semibold' : ''}`}>
+              <span class="text-gray-800">{row.name}</span>
+              <span class="text-center text-primary-600 font-mono">{row.fajr}</span>
+              <span class="text-center text-primary-600 font-mono">{row.isha}</span>
+              <span class="text-gray-500">{row.region}</span>
+            </div>
+          ))}
+        </div>
+        <p class="text-xs text-gray-500 mt-2">★ الطريقة المعتمدة في موقع timeofpray.net وفي الإمارات رسمياً.</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">لماذا تختلف أوقات الصلاة بين مدن الإمارات؟</h2>
+        <p>
+          حتى باستخدام نفس طريقة الحساب، تختلف أوقات الصلاة بين المدن بسبب عاملين:
+        </p>
+        <div class="space-y-3 mt-3">
+          <div class="p-3 bg-blue-50 rounded-xl border border-blue-100">
+            <p class="font-semibold text-blue-800 mb-1">📍 خط الطول (Longitude)</p>
+            <p class="text-blue-700 text-xs">
+              كلما كنت أشرق (خط طول أعلى)، كلما شهدت الشمس أبكر. الفجيرة (56.3°E) تسبق
+              الرويس (52.7°E) في كل أوقات الصلاة بنحو 14 دقيقة.
+            </p>
+          </div>
+          <div class="p-3 bg-green-50 rounded-xl border border-green-100">
+            <p class="font-semibold text-green-800 mb-1">📐 خط العرض (Latitude)</p>
+            <p class="text-green-700 text-xs">
+              يؤثر على طول اليوم وشدة الموسمية. المدن الشمالية (رأس الخيمة 25.8°N)
+              تختلف قليلاً عن المدن الجنوبية (بدع زايد 23.6°N) في مواقيت الفجر والعشاء خاصة.
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2 mt-4">
+          {[
+            { city: 'دبي (55.3°E)', href: 'dubai' },
+            { city: 'أبوظبي (54.4°E)', href: 'abu-dhabi' },
+            { city: 'الفجيرة (56.3°E)', href: 'fujairah' },
+            { city: 'الرويس (52.7°E)', href: 'al-ruwais' },
+          ].map(item => (
+            <a href={u(item.href)} class="bg-primary-50 text-primary-700 border border-primary-200 px-3 py-1.5 rounded-lg text-sm hover:bg-primary-100 transition-colors">
+              {item.city}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">الطريقة المعتمدة في الإمارات رسمياً</h2>
+        <p>
+          تعتمد <strong>الهيئة العامة للشؤون الإسلامية والأوقاف (AWQAF)</strong> في الإمارات
+          طريقة <strong>رابطة العالم الإسلامي (Muslim World League)</strong> بالإعدادات التالية:
+        </p>
+        <div class="bg-primary-50 rounded-xl p-4 mt-3 text-sm">
+          <div class="grid sm:grid-cols-2 gap-2">
+            {[
+              { label: 'زاوية الفجر', val: '18 درجة' },
+              { label: 'زاوية العشاء', val: '17 درجة' },
+              { label: 'طريقة العصر', val: 'الشافعي (ظل واحد)' },
+              { label: 'المنطقة الزمنية', val: 'UTC+4 (ثابتة)' },
+            ].map(item => (
+              <div class="flex justify-between bg-white rounded-lg px-3 py-2 border border-primary-100">
+                <span class="text-gray-600 text-xs">{item.label}</span>
+                <span class="text-primary-700 font-bold text-xs">{item.val}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <p class="mt-3 text-xs text-gray-500">
+          هذه هي نفس الإعدادات التي يستخدمها موقع timeofpray.net، مما يجعل نتائجنا
+          قريبة جداً من الأوقات الرسمية (الفارق المحتمل دقيقة إلى دقيقتين).
+        </p>
+      </section>
+
+      <div class="mt-8">
+        <FAQ items={faqItems} />
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-200">
+        <h2 class="text-base font-bold text-gray-800 mb-3">مقالات ذات صلة</h2>
+        <div class="flex flex-wrap gap-2">
+          <a href={u('blog/awqat-al-salah-wal-fusul')} class="text-sm text-primary-600 hover:underline">تغير أوقات الصلاة بالفصول</a>
+          <span class="text-gray-300">·</span>
+          <a href={u('blog/salat-al-dhuhr')} class="text-sm text-primary-600 hover:underline">صلاة الظهر والزوال</a>
+          <span class="text-gray-300">·</span>
+          <a href={u('maghrib')} class="text-sm text-primary-600 hover:underline">موعد أذان المغرب اليوم</a>
+        </div>
+        <a href={u('blog')} class="inline-block mt-4 text-sm text-gray-500 hover:text-primary-600">← جميع المقالات</a>
+      </div>
+
+    </div>
+  </article>
+</Base>

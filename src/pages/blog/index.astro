@@ -1,0 +1,69 @@
+---
+import Base from '../../layouts/Base.astro';
+import { blogPosts } from '../../data/blog';
+import { u } from '../../utils/url';
+
+const title = 'مقالات إسلامية — مواقيت الصلاة والفقه الإسلامي | timeofpray.net';
+const description = 'مقالات متخصصة في أوقات الصلاة الخمس، أركانها، فضائلها، وكيفية حسابها في الإمارات. محتوى ديني موثوق ومبسط.';
+---
+
+<Base title={title} description={description} canonical="/blog" cityName="المقالات">
+  <div class="max-w-5xl mx-auto px-4 py-8">
+
+    <div class="mb-8">
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-900 mb-2">مقالات ومعلومات</h1>
+      <p class="text-gray-500 text-sm">
+        محتوى ديني موثوق حول الصلاة وأوقاتها — لمن يريد الفهم العميق، لا مجرد الأوقات
+      </p>
+    </div>
+
+    <!-- Articles grid -->
+    <div class="grid md:grid-cols-2 gap-5">
+      {blogPosts.map(post => (
+        <a
+          href={u(`blog/${post.slug}`)}
+          class="group bg-white rounded-2xl shadow-sm border border-gray-100 p-5 hover:shadow-md hover:border-primary-200 transition-all flex flex-col"
+        >
+          <div class="flex flex-wrap gap-1.5 mb-3">
+            {post.tags.slice(0, 2).map(tag => (
+              <span class="text-xs bg-primary-50 text-primary-700 px-2 py-0.5 rounded-full">{tag}</span>
+            ))}
+          </div>
+          <h2 class="text-base font-bold text-gray-900 group-hover:text-primary-700 transition-colors mb-2 leading-snug">
+            {post.titleAr}
+          </h2>
+          <p class="text-gray-500 text-sm leading-relaxed flex-1 mb-4">
+            {post.excerpt}
+          </p>
+          <div class="flex items-center justify-between text-xs text-gray-400 mt-auto pt-3 border-t border-gray-100">
+            <span>⏱ {post.readMinutes} دقائق قراءة</span>
+            <span class="text-primary-600 font-medium group-hover:underline">اقرأ المزيد ←</span>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <!-- Internal links to main pages -->
+    <div class="mt-10 bg-primary-50 rounded-2xl p-5 border border-primary-100">
+      <h2 class="text-base font-bold text-primary-800 mb-4">مواقيت الصلاة اليوم</h2>
+      <div class="flex flex-wrap gap-2">
+        {[
+          { label: 'مواقيت دبي', href: 'dubai' },
+          { label: 'مواقيت أبوظبي', href: 'abu-dhabi' },
+          { label: 'مواقيت الشارقة', href: 'sharjah' },
+          { label: 'مواقيت عجمان', href: 'ajman' },
+          { label: 'أذان المغرب', href: 'maghrib' },
+          { label: 'مواقيت رمضان', href: 'ramadan' },
+        ].map(link => (
+          <a
+            href={u(link.href)}
+            class="bg-white text-primary-700 border border-primary-200 px-3 py-1.5 rounded-lg text-sm hover:bg-primary-100 transition-colors"
+          >
+            {link.label}
+          </a>
+        ))}
+      </div>
+    </div>
+
+  </div>
+</Base>

@@ -1,0 +1,174 @@
+---
+import Base from '../../layouts/Base.astro';
+import FAQ from '../../components/FAQ.astro';
+import { u } from '../../utils/url';
+
+const title = 'صلاة الظهر — الصلاة الوسطى ووقتها في الإمارات';
+const description = 'دليل صلاة الظهر الكامل: متى يبدأ وقت الزوال، كم ركعة، فضلها، والفارق في الوقت بين مدن الإمارات المختلفة.';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  inLanguage: 'ar',
+  datePublished: '2025-03-04',
+  dateModified: '2025-03-04',
+  author: { '@type': 'Organization', name: 'timeofpray.net' },
+  publisher: { '@type': 'Organization', name: 'timeofpray.net', url: 'https://timeofpray.net' },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: import.meta.env.SITE },
+    { '@type': 'ListItem', position: 2, name: 'المقالات', item: `${import.meta.env.SITE}blog` },
+    { '@type': 'ListItem', position: 3, name: 'صلاة الظهر', item: `${import.meta.env.SITE}blog/salat-al-dhuhr` },
+  ],
+};
+
+const faqItems = [
+  {
+    q: 'متى يبدأ وقت صلاة الظهر؟',
+    a: 'يبدأ وقت الظهر بزوال الشمس عن كبد السماء — أي حين تميل الشمس غرباً من أعلى نقطة لها. في الإمارات يكون ذلك عادةً بين الساعة 12:00 و12:30 ظهراً، ويتأخر قليلاً في الشتاء.',
+  },
+  {
+    q: 'متى ينتهي وقت صلاة الظهر؟',
+    a: 'ينتهي وقت الظهر بدخول وقت العصر، أي حين يصبح ظل كل شيء مساوياً له مضافاً إلى ظل الزوال (المذهب الشافعي)، أو ضعفه (المذهب الحنفي). وهذا يعني أن للظهر نحو ساعتين إلى ثلاث ساعات.',
+  },
+  {
+    q: 'كم عدد ركعات صلاة الظهر وسننها؟',
+    a: 'الفريضة أربع ركعات سرية (لا يجهر فيها بالقراءة). وسننها: أربع ركعات قبل الفريضة (يقرأ في كل ركعتين تسليمة)، وركعتان بعدها. قال ﷺ: «من حافظ على أربع ركعات قبل الظهر وأربع بعدها حرّمه الله على النار».',
+  },
+  {
+    q: 'لماذا سميت صلاة الظهر الصلاة الوسطى؟',
+    a: 'اختلف العلماء في الصلاة الوسطى المذكورة في قوله تعالى ﴿حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلَاةِ الْوُسْطَىٰ﴾. فذهب كثيرون إلى أنها العصر، وذهب آخرون إلى أنها الظهر لأنها تقع وسط النهار. والراجح عند جمهور المحدثين أنها العصر.',
+  },
+];
+---
+
+<Base title={title} description={description} canonical="/blog/salat-al-dhuhr" cityName="صلاة الظهر" schema={[articleSchema, breadcrumbSchema]}>
+  <article class="max-w-3xl mx-auto px-4 py-8">
+
+    <header class="mb-8">
+      <div class="flex flex-wrap gap-2 mb-3">
+        {['صلاة الظهر', 'أوقات الصلاة', 'الزوال'].map(tag => (
+          <span class="text-xs bg-primary-50 text-primary-700 px-2 py-0.5 rounded-full">{tag}</span>
+        ))}
+      </div>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-3">
+        صلاة الظهر — الصلاة الوسطى ووقتها في الإمارات
+      </h1>
+      <p class="text-gray-500 text-sm">⏱ 6 دقائق قراءة · نُشر في مارس 2025</p>
+    </header>
+
+    <div class="space-y-6 text-gray-700 text-sm leading-relaxed">
+
+      <div class="bg-primary-50 border-r-4 border-primary-500 rounded-xl p-4 text-base text-gray-800">
+        قال تعالى: <strong>﴿حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلَاةِ الْوُسْطَىٰ وَقُومُوا لِلَّهِ قَانِتِينَ﴾</strong> [البقرة: 238]
+      </div>
+
+      <p>
+        صلاة الظهر هي أولى صلوات النهار وفق الترتيب الفلكي، إذ تُصلَّى حين تزول الشمس
+        عن وسط السماء. وهي صلاة يغفل عنها كثير من المسلمين في وسط ازدحام يوم العمل،
+        لذا يعظُم أجرها لمن يحافظ عليها في وقتها.
+      </p>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">وقت الظهر والزوال — كيف يُحسب؟</h2>
+        <p>
+          وقت صلاة الظهر مرتبط بظاهرة <strong>الزوال</strong>: وهي اللحظة التي تكون فيها
+          الشمس في أعلى نقطة لها في السماء (التعامد)، ثم تبدأ في الميل نحو الغرب.
+          عند هذه اللحظة بالضبط يدخل وقت الظهر.
+        </p>
+        <div class="bg-gray-50 rounded-xl p-4 mt-3 text-xs">
+          <p class="font-semibold text-gray-800 mb-2">متوسط وقت الظهر في دبي حسب الفصل:</p>
+          <div class="grid grid-cols-2 gap-2">
+            {[
+              { month: 'يناير', time: '12:22 ظهراً' },
+              { month: 'أبريل', time: '12:09 ظهراً' },
+              { month: 'يوليو', time: '12:30 ظهراً' },
+              { month: 'أكتوبر', time: '12:03 ظهراً' },
+            ].map(row => (
+              <div class="bg-white rounded-lg p-2 border border-gray-200">
+                <p class="font-medium text-gray-700">{row.month}</p>
+                <p class="text-primary-600 font-bold">{row.time}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">الفارق في وقت الظهر بين مدن الإمارات</h2>
+        <p>
+          تمتد الإمارات من الغرب (أبوظبي/الرويس على خط 52°) إلى الشرق (الفجيرة على خط 56°)،
+          وهذا الفارق في خطوط الطول ينتج فارقاً زمنياً حقيقياً في مواقيت الصلاة.
+        </p>
+        <div class="bg-amber-50 rounded-xl p-3 mt-3 text-xs text-amber-800 border border-amber-200">
+          <strong>مثال تطبيقي:</strong> حين يكون وقت الظهر في الفجيرة 12:15 ظهراً،
+          يكون وقته في أبوظبي 12:25 ظهراً، وفي الرويس 12:30 ظهراً.
+          الفارق الإجمالي بين أقصى الشرق وأقصى الغرب نحو 15 دقيقة.
+        </div>
+        <div class="flex flex-wrap gap-2 mt-3">
+          {[
+            { city: 'دبي', href: 'dubai' }, { city: 'أبوظبي', href: 'abu-dhabi' },
+            { city: 'الشارقة', href: 'sharjah' }, { city: 'العين', href: 'al-ain' },
+            { city: 'الفجيرة', href: 'fujairah' }, { city: 'الرويس', href: 'al-ruwais' },
+          ].map(item => (
+            <a href={u(item.href)} class="bg-primary-50 text-primary-700 border border-primary-200 px-3 py-1.5 rounded-lg text-sm hover:bg-primary-100 transition-colors">
+              الظهر في {item.city}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">ركعات الظهر وسننها المؤكدة</h2>
+        <div class="space-y-2 mt-2">
+          {[
+            { type: 'سنة قبلية', count: '4 ركعات', detail: 'تُصلَّى بتسليمتين (ركعتان + ركعتان) قبل الفريضة مباشرة.', color: 'bg-green-50 border-green-200' },
+            { type: 'الفريضة', count: '4 ركعات', detail: 'أربع ركعات سرية (لا يجهر فيها بالقراءة)، ينوي فيها فريضة الظهر.', color: 'bg-primary-50 border-primary-200' },
+            { type: 'سنة بعدية', count: '2 ركعات', detail: 'ركعتان بعد الفريضة. ويُضاف إليها 2 أخريان لمن واظب.', color: 'bg-blue-50 border-blue-200' },
+          ].map(item => (
+            <div class={`flex gap-3 p-3 rounded-xl border ${item.color}`}>
+              <div class="min-w-[90px]">
+                <p class="font-bold text-gray-800 text-sm">{item.type}</p>
+                <p class="text-primary-600 font-semibold text-sm">{item.count}</p>
+              </div>
+              <p class="text-gray-600 text-xs">{item.detail}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">الظهر وصلاة الجمعة</h2>
+        <p>
+          يوم الجمعة تحل صلاة الجمعة (ركعتان مع خطبتين) محل صلاة الظهر (أربع ركعات)
+          لمن استوفى شروط وجوبها. من لم تجب عليه الجمعة — كالمرأة والمسافر — يصلي
+          الظهر أربعاً. اقرأ المزيد في مقالنا عن{' '}
+          <a href={u('blog/salat-al-jumua')} class="text-primary-600 hover:underline font-medium">صلاة الجمعة وأحكامها</a>.
+        </p>
+      </section>
+
+      <div class="mt-8">
+        <FAQ items={faqItems} />
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-200">
+        <h2 class="text-base font-bold text-gray-800 mb-3">مقالات ذات صلة</h2>
+        <div class="flex flex-wrap gap-2">
+          <a href={u('blog/salat-al-jumua')} class="text-sm text-primary-600 hover:underline">صلاة الجمعة</a>
+          <span class="text-gray-300">·</span>
+          <a href={u('blog/turuq-hisab-awqat-al-salah')} class="text-sm text-primary-600 hover:underline">طرق حساب أوقات الصلاة</a>
+          <span class="text-gray-300">·</span>
+          <a href={u('maghrib')} class="text-sm text-primary-600 hover:underline">موعد أذان المغرب</a>
+        </div>
+        <a href={u('blog')} class="inline-block mt-4 text-sm text-gray-500 hover:text-primary-600">← جميع المقالات</a>
+      </div>
+
+    </div>
+  </article>
+</Base>

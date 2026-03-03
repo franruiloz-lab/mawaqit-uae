@@ -1,0 +1,196 @@
+---
+import Base from '../../layouts/Base.astro';
+import FAQ from '../../components/FAQ.astro';
+import { u } from '../../utils/url';
+
+const title = 'أوقات الصلاة في الصيف والشتاء — لماذا تتغير كل يوم؟';
+const description = 'فهم لماذا تتغير مواقيت الصلاة يومياً وبين الفصول في الإمارات، والفارق الكبير بين الفجر صيفاً وشتاءً.';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  inLanguage: 'ar',
+  datePublished: '2025-03-07',
+  dateModified: '2025-03-07',
+  author: { '@type': 'Organization', name: 'timeofpray.net' },
+  publisher: { '@type': 'Organization', name: 'timeofpray.net', url: 'https://timeofpray.net' },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: import.meta.env.SITE },
+    { '@type': 'ListItem', position: 2, name: 'المقالات', item: `${import.meta.env.SITE}blog` },
+    { '@type': 'ListItem', position: 3, name: 'الفصول وأوقات الصلاة', item: `${import.meta.env.SITE}blog/awqat-al-salah-wal-fusul` },
+  ],
+};
+
+const faqItems = [
+  {
+    q: 'لماذا يتغير وقت الأذان كل يوم؟',
+    a: 'بسبب حركة الأرض حول الشمس على مدار السنة. محور الأرض مائل بزاوية 23.5°، مما يجعل موضع الشمس بالنسبة لأي نقطة على الأرض يتغير تدريجياً كل يوم. هذا يؤثر على لحظات الشروق والغروب والزوال، وبالتالي على مواقيت الصلاة.',
+  },
+  {
+    q: 'ما الفرق في وقت الفجر بين يناير ويوليو في دبي؟',
+    a: 'في يناير يكون الفجر حوالي الساعة 5:35 صباحاً، بينما في يوليو يكون حوالي 4:25 صباحاً. الفارق نحو 70 دقيقة. أما المغرب فيختلف أيضاً: يناير ~5:55 م، يوليو ~7:20 م — فارق نحو 85 دقيقة.',
+  },
+  {
+    q: 'متى يكون أقصر يوم وأطول يوم في الإمارات؟',
+    a: 'أقصر يوم (أقل ساعات ضوء) هو الانقلاب الشتوي حوالي 21-22 ديسمبر. أطول يوم هو الانقلاب الصيفي حوالي 21-22 يونيو. في الإمارات يبلغ طول النهار في الصيف نحو 13.5 ساعة وفي الشتاء نحو 10.5 ساعة.',
+  },
+  {
+    q: 'هل تتأثر صلاة الظهر بتغيرات الفصول؟',
+    a: 'نعم، لكن بشكل أقل حدة من الفجر والمغرب. وقت الظهر (الزوال) يتراوح بين 12:00 و12:30 في الإمارات على مدار السنة، بسبب تأثير "معادلة الوقت" (Equation of Time) الناجمة عن شكل مدار الأرض البيضاوي.',
+  },
+];
+---
+
+<Base title={title} description={description} canonical="/blog/awqat-al-salah-wal-fusul" cityName="الفصول وأوقات الصلاة" schema={[articleSchema, breadcrumbSchema]}>
+  <article class="max-w-3xl mx-auto px-4 py-8">
+
+    <header class="mb-8">
+      <div class="flex flex-wrap gap-2 mb-3">
+        {['الفصول', 'الفلك الإسلامي', 'أوقات الصلاة'].map(tag => (
+          <span class="text-xs bg-primary-50 text-primary-700 px-2 py-0.5 rounded-full">{tag}</span>
+        ))}
+      </div>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-3">
+        أوقات الصلاة في الصيف والشتاء — لماذا تتغير كل يوم؟
+      </h1>
+      <p class="text-gray-500 text-sm">⏱ 6 دقائق قراءة · نُشر في مارس 2025</p>
+    </header>
+
+    <div class="space-y-6 text-gray-700 text-sm leading-relaxed">
+
+      <p>
+        يلاحظ كثير من المسلمين أن أوقات الصلاة تتغير من يوم لآخر، وأن الفجر في الصيف
+        أبكر بكثير منه في الشتاء. هذا التغيير له أساس علمي فلكي دقيق يشرحه هذا المقال.
+      </p>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">السبب الأول: ميل محور الأرض</h2>
+        <p>
+          محور دوران الأرض مائل بزاوية <strong>23.5 درجة</strong> بالنسبة لمستوى مدارها
+          حول الشمس. هذا الميل هو السبب المباشر لوجود الفصول الأربعة ولاختلاف طول النهار
+          بين الصيف والشتاء.
+        </p>
+        <div class="space-y-2 mt-3">
+          <div class="flex gap-3 p-3 bg-amber-50 rounded-xl border border-amber-100">
+            <span class="text-2xl flex-shrink-0">☀️</span>
+            <div>
+              <p class="font-semibold text-amber-800 text-xs">الصيف (يونيو)</p>
+              <p class="text-amber-700 text-xs">نصف الكرة الشمالي يميل نحو الشمس → الشمس ترتفع أعلى في السماء → النهار أطول → الفجر أبكر والمغرب أمتد.</p>
+            </div>
+          </div>
+          <div class="flex gap-3 p-3 bg-blue-50 rounded-xl border border-blue-100">
+            <span class="text-2xl flex-shrink-0">❄️</span>
+            <div>
+              <p class="font-semibold text-blue-800 text-xs">الشتاء (ديسمبر)</p>
+              <p class="text-blue-700 text-xs">نصف الكرة الشمالي يبتعد عن الشمس → الشمس أقل ارتفاعاً → النهار أقصر → الفجر أمتد والمغرب يغرب أبكر.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">تأثير الفصول على كل صلاة في الإمارات</h2>
+        <div class="rounded-xl overflow-hidden border border-gray-200 mt-3">
+          <div class="bg-primary-700 text-white px-4 py-2 text-xs font-bold grid grid-cols-4 gap-2">
+            <span>الصلاة</span>
+            <span class="text-center">يناير (شتاء)</span>
+            <span class="text-center">يوليو (صيف)</span>
+            <span class="text-center">الفارق</span>
+          </div>
+          {[
+            { prayer: 'الفجر',   jan: '5:35 ص', jul: '4:25 ص', diff: '70 دقيقة', dir: '⬆️ أبكر صيفاً' },
+            { prayer: 'الشروق', jan: '7:02 ص', jul: '5:53 ص', diff: '69 دقيقة', dir: '⬆️ أبكر صيفاً' },
+            { prayer: 'الظهر',  jan: '12:22 م', jul: '12:30 م', diff: '8 دقائق', dir: '~ ثابت نسبياً' },
+            { prayer: 'العصر',  jan: '3:32 م', jul: '4:05 م', diff: '33 دقيقة', dir: '⬇️ أمتد صيفاً' },
+            { prayer: 'المغرب', jan: '5:50 م', jul: '7:17 م', diff: '87 دقيقة', dir: '⬇️ أمتد صيفاً' },
+            { prayer: 'العشاء', jan: '7:18 م', jul: '8:52 م', diff: '94 دقيقة', dir: '⬇️ أمتد صيفاً' },
+          ].map((row, i) => (
+            <div class={`grid grid-cols-4 gap-2 px-4 py-2.5 text-xs border-t border-gray-100 ${i % 2 === 0 ? 'bg-gray-50' : ''}`}>
+              <span class="font-semibold text-gray-800">{row.prayer}</span>
+              <span class="text-center text-blue-600 font-mono">{row.jan}</span>
+              <span class="text-center text-amber-600 font-mono">{row.jul}</span>
+              <span class="text-center text-gray-500">{row.diff}</span>
+            </div>
+          ))}
+        </div>
+        <p class="text-xs text-gray-500 mt-2">* الأوقات تقريبية لمدينة دبي. المصدر: حساب طريقة رابطة العالم الإسلامي.</p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">الانقلابان الشمسيان في الإمارات</h2>
+        <div class="grid sm:grid-cols-2 gap-3 mt-2">
+          <div class="bg-amber-50 rounded-xl p-4 border border-amber-200 text-center">
+            <div class="text-3xl mb-2">☀️</div>
+            <p class="font-bold text-amber-800">الانقلاب الصيفي</p>
+            <p class="text-amber-700 text-xs mt-1">حوالي 21 يونيو</p>
+            <p class="text-amber-600 text-xs mt-2">أطول يوم في السنة<br/>~13.5 ساعة نهار<br/>الفجر: 4:20 ص · المغرب: 7:20 م</p>
+          </div>
+          <div class="bg-blue-50 rounded-xl p-4 border border-blue-200 text-center">
+            <div class="text-3xl mb-2">❄️</div>
+            <p class="font-bold text-blue-800">الانقلاب الشتوي</p>
+            <p class="text-blue-700 text-xs mt-1">حوالي 21 ديسمبر</p>
+            <p class="text-blue-600 text-xs mt-2">أقصر يوم في السنة<br/>~10.5 ساعة نهار<br/>الفجر: 5:38 ص · المغرب: 5:45 م</p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">رمضان والفصول — لماذا يتحرك كل عام؟</h2>
+        <p>
+          التقويم الهجري قمري بحت (354 يوماً) ولا يرتبط بالفصول الشمسية. لذلك يتقدم
+          رمضان كل عام بنحو <strong>11 يوماً</strong> بالنسبة للتقويم الميلادي. هذا يعني:
+        </p>
+        <ul class="mt-2 space-y-1 list-disc list-inside text-gray-600">
+          <li>رمضان 2025: مارس (ربيع — أيام معتدلة الطول)</li>
+          <li>رمضان 2026: فبراير (شتاء — ساعات صيام أقل)</li>
+          <li>رمضان 2030: يناير (شتاء بارد — أقصر أيام)</li>
+          <li>رمضان 2035: نوفمبر (خريف — ساعات صيام معتدلة)</li>
+          <li>رمضان 2040 تقريباً: يوليو (صيف — أطول وأشد أيام الصيام)</li>
+        </ul>
+        <p class="mt-2">
+          لمعرفة مواقيت السحور والإفطار في رمضان الحالي، راجع
+          <a href={u('ramadan')} class="text-primary-600 hover:underline font-medium">صفحة مواقيت رمضان</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">تحقق من الأوقات الدقيقة اليوم</h2>
+        <p>لأن أوقات الصلاة تتغير كل يوم، يُنصح بمراجعة الأوقات يومياً:</p>
+        <div class="flex flex-wrap gap-2 mt-3">
+          {[
+            { city: 'دبي', href: 'dubai' }, { city: 'أبوظبي', href: 'abu-dhabi' },
+            { city: 'رأس الخيمة', href: 'ras-al-khaimah' }, { city: 'أذان المغرب', href: 'maghrib' },
+          ].map(item => (
+            <a href={u(item.href)} class="bg-primary-50 text-primary-700 border border-primary-200 px-3 py-1.5 rounded-lg text-sm hover:bg-primary-100 transition-colors">
+              {item.city}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <div class="mt-8">
+        <FAQ items={faqItems} />
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-200">
+        <h2 class="text-base font-bold text-gray-800 mb-3">مقالات ذات صلة</h2>
+        <div class="flex flex-wrap gap-2">
+          <a href={u('blog/turuq-hisab-awqat-al-salah')} class="text-sm text-primary-600 hover:underline">طرق حساب أوقات الصلاة</a>
+          <span class="text-gray-300">·</span>
+          <a href={u('blog/salat-al-fajr')} class="text-sm text-primary-600 hover:underline">صلاة الفجر</a>
+          <span class="text-gray-300">·</span>
+          <a href={u('ramadan')} class="text-sm text-primary-600 hover:underline">مواقيت رمضان</a>
+        </div>
+        <a href={u('blog')} class="inline-block mt-4 text-sm text-gray-500 hover:text-primary-600">← جميع المقالات</a>
+      </div>
+
+    </div>
+  </article>
+</Base>

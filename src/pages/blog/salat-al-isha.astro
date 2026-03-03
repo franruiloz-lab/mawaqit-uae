@@ -1,0 +1,198 @@
+---
+import Base from '../../layouts/Base.astro';
+import FAQ from '../../components/FAQ.astro';
+import { u } from '../../utils/url';
+
+const title = 'صلاة العشاء — وقتها وركعاتها وصلاة التراويح في رمضان';
+const description = 'تعرّف على وقت صلاة العشاء في الإمارات، كم ركعة فيها، وعلاقتها بصلاة التراويح في شهر رمضان المبارك.';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  inLanguage: 'ar',
+  datePublished: '2025-03-05',
+  dateModified: '2025-03-05',
+  author: { '@type': 'Organization', name: 'timeofpray.net' },
+  publisher: { '@type': 'Organization', name: 'timeofpray.net', url: 'https://timeofpray.net' },
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: import.meta.env.SITE },
+    { '@type': 'ListItem', position: 2, name: 'المقالات', item: `${import.meta.env.SITE}blog` },
+    { '@type': 'ListItem', position: 3, name: 'صلاة العشاء', item: `${import.meta.env.SITE}blog/salat-al-isha` },
+  ],
+};
+
+const faqItems = [
+  {
+    q: 'متى يبدأ وقت صلاة العشاء وحتى متى؟',
+    a: 'يبدأ وقت العشاء بغياب الشفق الأحمر (نحو ساعة ونصف بعد المغرب في الإمارات) وينتهي بطلوع الفجر. ووقتها المختار ينتهي بمنتصف الليل الشرعي (منتصف المسافة بين المغرب والفجر).',
+  },
+  {
+    q: 'كم ركعة صلاة العشاء؟',
+    a: 'العشاء أربع ركعات فريضة سرية (لا يجهر بالقراءة). وسننها: أربع ركعات قبلية (اختيارية)، وركعتان بعدية (مؤكدة). ويُضاف إليها في رمضان التراويح (8 أو 20 ركعة) والوتر (واجب عند الحنفية، سنة عند الجمهور).',
+  },
+  {
+    q: 'ما هي صلاة التراويح ومتى تُصلى؟',
+    a: 'التراويح صلاة تُخص شهر رمضان، تُؤدَّى بعد صلاة العشاء. وهي 8 ركعات عند بعض العلماء و20 ركعة عند آخرين، تُصلَّى بتسليمة كل ركعتين. تُختم عادةً بالوتر. ووقتها من بعد العشاء حتى طلوع الفجر.',
+  },
+  {
+    q: 'هل يجوز تأخير صلاة العشاء حتى منتصف الليل؟',
+    a: 'نعم، يجوز تأخير العشاء إلى منتصف الليل الشرعي، بل يُستحب تأخيرها قليلاً ما لم يشق ذلك على المصلي. قال ﷺ: «لولا أن أشق على أمتي لأخّرت العشاء إلى ثلث الليل». أما تأخيرها بعد منتصف الليل فمكروه دون عذر.',
+  },
+  {
+    q: 'ما الفضل من صلاة العشاء في جماعة؟',
+    a: 'قال ﷺ: «من صلى العشاء في جماعة فكأنما قام نصف الليل، ومن صلى الصبح في جماعة فكأنما قام الليل كله» [رواه مسلم]. وهذا يدل على الفضل العظيم لصلاة العشاء جماعةً في المسجد.',
+  },
+];
+---
+
+<Base title={title} description={description} canonical="/blog/salat-al-isha" cityName="صلاة العشاء" schema={[articleSchema, breadcrumbSchema]}>
+  <article class="max-w-3xl mx-auto px-4 py-8">
+
+    <header class="mb-8">
+      <div class="flex flex-wrap gap-2 mb-3">
+        {['صلاة العشاء', 'التراويح', 'رمضان'].map(tag => (
+          <span class="text-xs bg-primary-50 text-primary-700 px-2 py-0.5 rounded-full">{tag}</span>
+        ))}
+      </div>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-3">
+        صلاة العشاء — وقتها وركعاتها وصلاة التراويح في رمضان
+      </h1>
+      <p class="text-gray-500 text-sm">⏱ 7 دقائق قراءة · نُشر في مارس 2025</p>
+    </header>
+
+    <div class="space-y-6 text-gray-700 text-sm leading-relaxed">
+
+      <div class="bg-primary-50 border-r-4 border-primary-500 rounded-xl p-4 text-base text-gray-800">
+        قال ﷺ: <strong>«من صلى العشاء في جماعة فكأنما قام نصف الليل»</strong> [رواه مسلم]
+      </div>
+
+      <p>
+        صلاة العشاء هي خاتمة الصلوات الخمس في اليوم، وتُصلَّى في ظلام الليل بعد غياب
+        الشفق الأحمر. وهي صلاة لها ارتباط خاص بشهر رمضان من خلال صلاة التراويح التي
+        تُؤدَّى في أعقابها طوال ليالي الشهر الفضيل.
+      </p>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">وقت صلاة العشاء في الإمارات</h2>
+        <p>
+          يبدأ وقت العشاء بـ<strong>غياب الشفق الأحمر</strong> من الأفق الغربي، وهو يقع
+          عادةً بعد نحو 75-90 دقيقة من أذان المغرب في الإمارات. وينتهي وقتها المختار
+          بمنتصف الليل الشرعي، ويمتد الجائز حتى طلوع الفجر.
+        </p>
+        <div class="bg-gray-50 rounded-xl p-4 mt-3 text-xs">
+          <p class="font-semibold text-gray-800 mb-2">أوقات تقريبية للعشاء في دبي:</p>
+          <div class="grid grid-cols-2 gap-2">
+            {[
+              { month: 'يناير', time: '7:30 مساءً' },
+              { month: 'أبريل', time: '8:20 مساءً' },
+              { month: 'يوليو', time: '9:05 مساءً' },
+              { month: 'أكتوبر', time: '7:50 مساءً' },
+            ].map(row => (
+              <div class="bg-white rounded-lg p-2 border border-gray-200">
+                <p class="font-medium text-gray-700">{row.month}</p>
+                <p class="text-primary-600 font-bold">{row.time}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2 mt-3">
+          {[
+            { city: 'دبي', href: 'dubai' }, { city: 'الشارقة', href: 'sharjah' },
+            { city: 'عجمان', href: 'ajman' }, { city: 'أم القيوين', href: 'umm-al-quwain' },
+          ].map(item => (
+            <a href={u(item.href)} class="bg-primary-50 text-primary-700 border border-primary-200 px-3 py-1.5 rounded-lg text-sm hover:bg-primary-100 transition-colors">
+              العشاء في {item.city}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">ركعات العشاء وسننها</h2>
+        <div class="space-y-2">
+          {[
+            { type: 'سنة قبلية', count: '4 ركعات (غير مؤكدة)', color: 'bg-gray-50 border-gray-200' },
+            { type: 'الفريضة', count: '4 ركعات سرية', color: 'bg-primary-50 border-primary-200' },
+            { type: 'سنة بعدية مؤكدة', count: '2 ركعات', color: 'bg-green-50 border-green-200' },
+            { type: 'صلاة الوتر', count: '1 أو 3 أو أكثر ركعات', color: 'bg-amber-50 border-amber-200' },
+          ].map(item => (
+            <div class={`flex justify-between items-center p-3 rounded-xl border ${item.color}`}>
+              <span class="font-semibold text-gray-800 text-sm">{item.type}</span>
+              <span class="text-primary-600 font-bold text-sm">{item.count}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">صلاة التراويح في رمضان</h2>
+        <p>
+          التراويح من أبرز شعائر رمضان، وهي صلاة نافلة تُؤدَّى جماعةً في المسجد بعد
+          صلاة العشاء. قال ﷺ: <strong>«من قام رمضان إيماناً واحتساباً غُفر له ما تقدم من ذنبه»</strong>.
+        </p>
+        <div class="space-y-3 mt-3">
+          <div class="bg-primary-50 rounded-xl p-3 border border-primary-100">
+            <p class="font-semibold text-primary-800 mb-1">عدد الركعات</p>
+            <p class="text-primary-700 text-xs">
+              الجمهور يُجيز 8 ركعات وهو ما رُوي عن بعض الصحابة، و20 ركعة هو عمل أهل المدينة
+              في عهد عمر رضي الله عنه وهو الأشهر في مساجد الإمارات. كلا الرأيين له أصل معتبر.
+            </p>
+          </div>
+          <div class="bg-amber-50 rounded-xl p-3 border border-amber-100">
+            <p class="font-semibold text-amber-800 mb-1">الوتر بعد التراويح</p>
+            <p class="text-amber-700 text-xs">
+              يُختم التراويح عادةً بصلاة الوتر (1 أو 3 أو أكثر). إذا صليت التراويح في المسجد،
+              انتظر الإمام حتى ينتهي من الوتر لتنال أجر قيام الليل كاملاً.
+            </p>
+          </div>
+        </div>
+        <p class="mt-3">
+          لمعرفة مواقيت الصلاة خلال رمضان في الإمارات، تفضل بزيارة
+          <a href={u('ramadan')} class="text-primary-600 hover:underline font-medium">صفحة مواقيت رمضان</a>.
+        </p>
+      </section>
+
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">فضل صلاة العشاء</h2>
+        <div class="space-y-2">
+          {[
+            { text: '«من صلى العشاء في جماعة فكأنما قام نصف الليل»', src: 'رواه مسلم' },
+            { text: '«لو يعلمون ما في الصبح والعشاء لأتوهما ولو حبواً»', src: 'رواه البخاري ومسلم' },
+          ].map(h => (
+            <div class="flex gap-3 p-3 bg-white rounded-xl border border-gray-200">
+              <span class="text-xl flex-shrink-0">💬</span>
+              <div>
+                <p class="text-gray-800 text-xs">{h.text}</p>
+                <p class="text-gray-400 text-xs mt-1">{h.src}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <div class="mt-8">
+        <FAQ items={faqItems} />
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-gray-200">
+        <h2 class="text-base font-bold text-gray-800 mb-3">مقالات ذات صلة</h2>
+        <div class="flex flex-wrap gap-2">
+          <a href={u('blog/salat-al-fajr')} class="text-sm text-primary-600 hover:underline">صلاة الفجر</a>
+          <span class="text-gray-300">·</span>
+          <a href={u('ramadan')} class="text-sm text-primary-600 hover:underline">مواقيت رمضان</a>
+          <span class="text-gray-300">·</span>
+          <a href={u('maghrib')} class="text-sm text-primary-600 hover:underline">أذان المغرب</a>
+        </div>
+        <a href={u('blog')} class="inline-block mt-4 text-sm text-gray-500 hover:text-primary-600">← جميع المقالات</a>
+      </div>
+
+    </div>
+  </article>
+</Base>

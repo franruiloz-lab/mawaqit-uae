@@ -1,0 +1,244 @@
+---
+import Base from '../../layouts/Base.astro';
+import FAQ from '../../components/FAQ.astro';
+import { u } from '../../utils/url';
+
+const title = 'صلاة الجمعة — شروطها وأوقاتها وأهميتها في الإسلام';
+const description = 'دليل شامل لصلاة الجمعة: وقتها، شروط وجوبها، ركعاتها، وفضلها. اعرف متى يبدأ وقت خطبة الجمعة في الإمارات.';
+
+const publishDate = '2025-03-01';
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: title,
+  description,
+  inLanguage: 'ar',
+  datePublished: publishDate,
+  dateModified: publishDate,
+  author: { '@type': 'Organization', name: 'timeofpray.net' },
+  publisher: { '@type': 'Organization', name: 'timeofpray.net', url: 'https://timeofpray.net' },
+  url: 'https://timeofpray.net/blog/salat-al-jumua',
+};
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: import.meta.env.SITE },
+    { '@type': 'ListItem', position: 2, name: 'المقالات', item: `${import.meta.env.SITE}blog` },
+    { '@type': 'ListItem', position: 3, name: 'صلاة الجمعة', item: `${import.meta.env.SITE}blog/salat-al-jumua` },
+  ],
+};
+
+const faqItems = [
+  {
+    q: 'متى يبدأ وقت صلاة الجمعة؟',
+    a: 'يبدأ وقت صلاة الجمعة من دخول وقت الظهر (زوال الشمس) وينتهي بدخول وقت العصر. في الإمارات يكون ذلك عادةً بين الساعة 12:00 و1:30 ظهراً بحسب الفصل والمدينة.',
+  },
+  {
+    q: 'هل صلاة الجمعة فرض عين أم كفاية؟',
+    a: 'صلاة الجمعة فرض عين على كل مسلم ذكر بالغ عاقل مقيم، لقوله تعالى: "يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا نُودِيَ لِلصَّلَاةِ مِن يَوْمِ الْجُمُعَةِ فَاسْعَوْا إِلَىٰ ذِكْرِ اللَّهِ". ومن تركها ثلاث جمع متواليات بغير عذر طُبع على قلبه.',
+  },
+  {
+    q: 'كم عدد ركعات صلاة الجمعة؟',
+    a: 'صلاة الجمعة ركعتان يجهر فيهما بالقراءة، وتسبقهما خطبتان. أما من فاتته الجمعة فيُصلي الظهر أربعاً.',
+  },
+  {
+    q: 'هل تُقبل صلاة الجمعة بدون خطبة؟',
+    a: 'الخطبة شرط لصحة صلاة الجمعة عند جمهور الفقهاء، ولا تصح الجمعة بدونها. ويشترط في الخطبة أن تتضمن حمد الله والصلاة على النبي ﷺ والوصية بتقوى الله وتلاوة آية من القرآن.',
+  },
+  {
+    q: 'ما الفرق بين صلاة الجمعة وصلاة الظهر؟',
+    a: 'صلاة الجمعة بديل عن صلاة الظهر يوم الجمعة للمستوفين شروط وجوبها. الجمعة ركعتان مع خطبتين، بينما الظهر أربع ركعات. من لم تجب عليه الجمعة (كالمرأة والمسافر والمريض) يصلي الظهر.',
+  },
+];
+---
+
+<Base title={title} description={description} canonical="/blog/salat-al-jumua" cityName="صلاة الجمعة" schema={[articleSchema, breadcrumbSchema]}>
+  <article class="max-w-3xl mx-auto px-4 py-8">
+
+    <!-- Header -->
+    <header class="mb-8">
+      <div class="flex flex-wrap gap-2 mb-3">
+        {['صلاة الجمعة', 'فقه الصلاة', 'أوقات الصلاة'].map(tag => (
+          <span class="text-xs bg-primary-50 text-primary-700 px-2 py-0.5 rounded-full">{tag}</span>
+        ))}
+      </div>
+      <h1 class="text-2xl md:text-3xl font-bold text-gray-900 leading-tight mb-3">
+        صلاة الجمعة — شروطها وأوقاتها وأهميتها في الإسلام
+      </h1>
+      <p class="text-gray-500 text-sm">⏱ 8 دقائق قراءة · نُشر في مارس 2025</p>
+    </header>
+
+    <div class="prose-arabic space-y-6 text-gray-700 text-sm leading-relaxed">
+
+      <!-- Intro -->
+      <div class="bg-primary-50 border-r-4 border-primary-500 rounded-xl p-4 text-base text-gray-800 leading-relaxed">
+        يقول الله تعالى: <strong>﴿يَا أَيُّهَا الَّذِينَ آمَنُوا إِذَا نُودِيَ لِلصَّلَاةِ مِن يَوْمِ الْجُمُعَةِ فَاسْعَوْا إِلَىٰ ذِكْرِ اللَّهِ وَذَرُوا الْبَيْعَ﴾ [الجمعة: 9]
+      </div>
+
+      <p>
+        صلاة الجمعة من أعظم شعائر الإسلام وأكثرها تمييزاً ليوم الجمعة عن سائر الأيام.
+        وهي فريضة مستقلة لها أحكامها وشروطها التي يجب على كل مسلم معرفتها.
+        في هذا المقال نستعرض كل ما يخص صلاة الجمعة من وقت وشروط وأحكام وفضائل.
+      </p>
+
+      <!-- Section 1 -->
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">وقت صلاة الجمعة في الإمارات</h2>
+        <p>
+          يبدأ وقت صلاة الجمعة من <strong>زوال الشمس</strong> — أي دخول وقت الظهر — وينتهي
+          بدخول وقت العصر. وهذا هو مذهب جمهور الفقهاء.
+        </p>
+        <p class="mt-2">
+          في الإمارات العربية المتحدة، يتراوح وقت صلاة الجمعة عادةً بين
+          <strong>12:00 ظهراً و1:30 مساءً</strong>، وتقام في معظم المساجد مباشرة بعد الأذان،
+          مع مراعاة أن تُعلن كل مسجد عن موعدها بحسب جدوله.
+        </p>
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 mt-3 text-xs text-amber-800">
+          ⏰ للتحقق من وقت الظهر اليوم في مدينتك، راجع صفحة
+          <a href={u('dubai')} class="text-primary-600 hover:underline font-medium">مواقيت الصلاة في دبي</a>،
+          <a href={u('abu-dhabi')} class="text-primary-600 hover:underline font-medium">أبوظبي</a>، أو
+          <a href={u('sharjah')} class="text-primary-600 hover:underline font-medium">الشارقة</a>.
+        </div>
+      </section>
+
+      <!-- Section 2 -->
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">شروط وجوب صلاة الجمعة</h2>
+        <p>تجب صلاة الجمعة على من توافرت فيه الشروط التالية:</p>
+        <div class="space-y-2 mt-3">
+          {[
+            { title: 'الإسلام', desc: 'لا تجب على غير المسلم.' },
+            { title: 'البلوغ', desc: 'لا تجب على الصبي الذي لم يبلغ، وإن صحّت منه.' },
+            { title: 'العقل', desc: 'لا تجب على المجنون أو فاقد العقل.' },
+            { title: 'الذكورة', desc: 'لا تجب على المرأة، وإن أدّتها مع الجماعة صحّت وأجزأت عن الظهر.' },
+            { title: 'الإقامة', desc: 'لا تجب على المسافر سفراً يبيح القصر، فيصلي ظهراً.' },
+            { title: 'الصحة', desc: 'المريض الذي يشق عليه الحضور معذور بالتخلف.' },
+          ].map(item => (
+            <div class="flex gap-2 items-start p-2.5 bg-gray-50 rounded-lg">
+              <span class="text-primary-600 font-bold text-sm flex-shrink-0">✔</span>
+              <div>
+                <span class="font-semibold text-gray-800">{item.title}: </span>
+                <span class="text-gray-600">{item.desc}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Section 3 -->
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">ركعات صلاة الجمعة وكيفية أدائها</h2>
+        <p>
+          صلاة الجمعة <strong>ركعتان</strong> يجهر فيهما الإمام بالقراءة، وتسبقهما خطبتان
+          يجلس الإمام بينهما جلسةً قصيرة.
+        </p>
+        <div class="mt-3 space-y-2">
+          <div class="border border-gray-200 rounded-xl overflow-hidden">
+            <div class="bg-primary-700 text-white px-4 py-2 text-sm font-semibold">ترتيب صلاة الجمعة</div>
+            {[
+              { n: '1', step: 'الخطبة الأولى', desc: 'يصعد الخطيب المنبر ويلقي الخطبة الأولى (حمد، صلاة على النبي، موعظة، آية قرآنية).' },
+              { n: '2', step: 'الجلسة بين الخطبتين', desc: 'يجلس الخطيب جلسةً خفيفة بين الخطبتين.' },
+              { n: '3', step: 'الخطبة الثانية', desc: 'تكون أقصر من الأولى، وتنتهي بالدعاء.' },
+              { n: '4', step: 'الأذان الثاني', desc: 'يُؤذَّن أذاناً ثانياً (أو إقامة في بعض المساجد) إيذاناً ببدء الصلاة.' },
+              { n: '5', step: 'صلاة الجمعة', desc: 'ركعتان خلف الإمام، يجهر فيهما بسورتين بعد الفاتحة.' },
+            ].map(item => (
+              <div class="flex gap-3 px-4 py-3 border-b border-gray-100 last:border-0">
+                <span class="w-6 h-6 bg-primary-100 text-primary-700 rounded-full text-xs font-bold flex items-center justify-center flex-shrink-0 mt-0.5">{item.n}</span>
+                <div>
+                  <p class="font-semibold text-gray-800 text-sm">{item.step}</p>
+                  <p class="text-gray-600 text-xs mt-0.5">{item.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <h3 class="text-base font-bold text-gray-800 mt-5 mb-2">ماذا تفعل إذا فاتتك الجمعة؟</h3>
+        <p>
+          إذا فاتتك صلاة الجمعة بعذر أو بغير عذر، فتصلي الظهر <strong>أربع ركعات</strong>.
+          وإذا أدركت الإمام في الركعة الثانية، أتممت معه وقضيت ركعة بعد السلام.
+        </p>
+      </section>
+
+      <!-- Section 4 -->
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">آداب يوم الجمعة وسننه</h2>
+        <p>يوم الجمعة يوم عظيم له آداب خاصة ينبغي للمسلم مراعاتها:</p>
+        <div class="grid sm:grid-cols-2 gap-2 mt-3">
+          {[
+            { icon: '🛁', text: 'الاغتسال يوم الجمعة (سنة مؤكدة)' },
+            { icon: '👕', text: 'لبس أحسن الثياب والتطيب' },
+            { icon: '📖', text: 'قراءة سورة الكهف كاملة أو أجزاء منها' },
+            { icon: '🕌', text: 'التبكير إلى المسجد قبل الأذان' },
+            { icon: '🤲', text: 'الإكثار من الصلاة على النبي ﷺ' },
+            { icon: '⏰', text: 'الدعاء في الساعة الأخيرة قبل المغرب' },
+          ].map(item => (
+            <div class="flex gap-2 items-center bg-gray-50 rounded-lg p-2.5 text-sm">
+              <span class="text-lg">{item.icon}</span>
+              <span class="text-gray-700">{item.text}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- Section 5 -->
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">فضل يوم الجمعة في الإسلام</h2>
+        <p>
+          قال رسول الله ﷺ: <strong>«خير يوم طلعت عليه الشمس يوم الجمعة، فيه خُلق آدم،
+          وفيه أُدخل الجنة، وفيه أُخرج منها»</strong> [رواه مسلم].
+        </p>
+        <p class="mt-2">
+          ومن فضائل يوم الجمعة أن فيه ساعة إجابة، وأن من قرأ سورة الكهف فيه أضاء له نور
+          من الجمعة إلى الجمعة. والمشي إلى الجمعة بكل خطوة أجر سنة صيامها وقيامها.
+        </p>
+      </section>
+
+      <!-- Section 6 -->
+      <section>
+        <h2 class="text-xl font-bold text-gray-900 mt-8 mb-3">صلاة الجمعة ووقت الظهر في مدن الإمارات</h2>
+        <p>
+          بما أن صلاة الجمعة تُصلَّى في وقت الظهر، فإن أوقاتها تتباين قليلاً بين مدن الإمارات
+          بحسب الموقع الجغرافي. الفجيرة (أقصى الشرق) يدخل عليها الظهر أبكر من أبوظبي (أقصى الغرب)
+          بنحو 8-10 دقائق.
+        </p>
+        <div class="flex flex-wrap gap-2 mt-3">
+          {[
+            { city: 'دبي', href: 'dubai' },
+            { city: 'أبوظبي', href: 'abu-dhabi' },
+            { city: 'الشارقة', href: 'sharjah' },
+            { city: 'عجمان', href: 'ajman' },
+            { city: 'رأس الخيمة', href: 'ras-al-khaimah' },
+            { city: 'الفجيرة', href: 'fujairah' },
+          ].map(item => (
+            <a href={u(item.href)} class="bg-primary-50 text-primary-700 border border-primary-200 px-3 py-1.5 rounded-lg text-sm hover:bg-primary-100 transition-colors">
+              وقت الظهر في {item.city}
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <div class="mt-8">
+        <FAQ items={faqItems} />
+      </div>
+
+      <!-- Related articles + nav -->
+      <div class="mt-8 pt-6 border-t border-gray-200">
+        <h2 class="text-base font-bold text-gray-800 mb-3">مقالات ذات صلة</h2>
+        <div class="flex flex-wrap gap-2">
+          <a href={u('blog/arkan-al-salah')} class="text-sm text-primary-600 hover:underline">أركان الصلاة وشروطها</a>
+          <span class="text-gray-300">·</span>
+          <a href={u('blog/salat-al-dhuhr')} class="text-sm text-primary-600 hover:underline">صلاة الظهر الوسطى</a>
+          <span class="text-gray-300">·</span>
+          <a href={u('maghrib')} class="text-sm text-primary-600 hover:underline">موعد أذان المغرب اليوم</a>
+        </div>
+        <a href={u('blog')} class="inline-block mt-4 text-sm text-gray-500 hover:text-primary-600">← جميع المقالات</a>
+      </div>
+
+    </div>
+  </article>
+</Base>
