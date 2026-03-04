@@ -23,9 +23,26 @@ const breadcrumbSchema = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: import.meta.env.SITE },
-    { '@type': 'ListItem', position: 2, name: 'المقالات', item: `${import.meta.env.SITE}blog` },
-    { '@type': 'ListItem', position: 3, name: 'صلاة الفجر', item: `${import.meta.env.SITE}blog/salat-al-fajr` },
+    { '@type': 'ListItem', position: 2, name: 'المقالات', item: `${import.meta.env.SITE}/blog` },
+    { '@type': 'ListItem', position: 3, name: 'صلاة الفجر', item: `${import.meta.env.SITE}/blog/salat-al-fajr` },
   ],
+};
+
+const _d = new Date(new Date().getTime() + 4 * 60 * 60 * 1000).toISOString().split('T')[0];
+
+const eventSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: 'صلاة الفجر في مساجد الإمارات',
+  description: 'صلاة الفجر اليومية في مساجد الإمارات — الصلاة الأولى من الصلوات الخمس',
+  startDate: `${_d}T05:30:00+04:00`,
+  endDate: `${_d}T06:00:00+04:00`,
+  eventStatus: 'https://schema.org/EventScheduled',
+  eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
+  location: { '@type': 'Place', name: 'المساجد في الإمارات العربية المتحدة', address: { '@type': 'PostalAddress', addressCountry: 'AE' } },
+  image: 'https://timeofpray.net/og-image.svg',
+  organizer: { '@type': 'Organization', name: 'وزارة الأوقاف والشؤون الإسلامية الإماراتية', url: 'https://awqaf.gov.ae' },
+  offers: { '@type': 'Offer', price: '0', priceCurrency: 'AED', availability: 'https://schema.org/InStock' },
 };
 
 const faqItems = [
@@ -52,7 +69,7 @@ const faqItems = [
 ];
 ---
 
-<Base title={title} description={description} canonical="/blog/salat-al-fajr" cityName="صلاة الفجر" schema={[articleSchema, breadcrumbSchema]}>
+<Base title={title} description={description} canonical="/blog/salat-al-fajr" cityName="صلاة الفجر" schema={[articleSchema, breadcrumbSchema, eventSchema]}>
   <article class="max-w-3xl mx-auto px-4 py-8">
 
     <header class="mb-8">
