@@ -10,37 +10,37 @@ const now = new Date();
 const dubaiCity = getCityById('dubai')!;
 const dubaiTimes = calcPrayerTimes(dubaiCity.lat, dubaiCity.lng, now);
 
-// Ramadan 2025: March 1 – March 30 (approximate)
-const ramadanSchedule = getMonthSchedule(dubaiCity.lat, dubaiCity.lng, 2025, 3);
+// Ramadan 2026: February 18 – March 19 (approximate)
+const ramadanSchedule = getMonthSchedule(dubaiCity.lat, dubaiCity.lng, 2026, 2);
 
-const title = `مواقيت الصلاة في رمضان 2025 الإمارات | أوقات السحور والإفطار`;
-const description = `جدول مواقيت الصلاة في رمضان 2025 في الإمارات — دبي، أبوظبي، الشارقة. أوقات الإفطار (المغرب) والسحور (الفجر) يومياً طوال شهر رمضان المبارك.`;
+const title = `مواقيت الصلاة في رمضان 2026 الإمارات | أوقات السحور والإفطار`;
+const description = `جدول مواقيت الصلاة في رمضان 2026 في الإمارات — دبي، أبوظبي، الشارقة. أوقات الإفطار (المغرب) والسحور (الفجر) يومياً طوال شهر رمضان المبارك.`;
 
 const breadcrumbSchema = {
   '@context': 'https://schema.org',
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: import.meta.env.SITE },
-    { '@type': 'ListItem', position: 2, name: 'رمضان 2025', item: `${import.meta.env.SITE}ramadan` },
+    { '@type': 'ListItem', position: 2, name: 'رمضان 2026', item: `${import.meta.env.SITE}ramadan/` },
   ],
 };
 
 const faqItems = [
   {
-    q: 'متى موعد الإفطار في رمضان 2025 في دبي؟',
-    a: 'موعد الإفطار في رمضان يتحدد بموعد أذان المغرب كل يوم. في مارس 2025 يتراوح وقت المغرب في دبي بين 6:20 م و6:30 م تقريباً.',
+    q: 'متى موعد الإفطار في رمضان 2026 في دبي؟',
+    a: 'موعد الإفطار في رمضان يتحدد بموعد أذان المغرب كل يوم. في فبراير 2026 يتراوح وقت المغرب في دبي بين 6:10 م و6:20 م تقريباً.',
   },
   {
     q: 'ما هو وقت السحور في رمضان في الإمارات؟',
-    a: 'ينتهي وقت السحور بأذان الفجر. في رمضان 2025 في الإمارات يكون الفجر في حدود الساعة 5:10 ص تقريباً.',
+    a: 'ينتهي وقت السحور بأذان الفجر. في رمضان 2026 في الإمارات يكون الفجر في حدود الساعة 5:30 ص تقريباً.',
   },
   {
     q: 'هل مواقيت رمضان تختلف بين مدن الإمارات؟',
     a: 'نعم، تختلف بفارق دقيقة إلى دقيقتين. اختر مدينتك من القائمة للحصول على الأوقات الدقيقة.',
   },
   {
-    q: 'ما هو أول يوم رمضان 2025؟',
-    a: 'وفق التقديرات الفلكية، يبدأ رمضان 2025 في أوائل مارس (حوالي 1-3 مارس 2025). ويُعلن رسمياً بعد رؤية الهلال.',
+    q: 'ما هو أول يوم رمضان 2026؟',
+    a: 'وفق التقديرات الفلكية، يبدأ رمضان 2026 في حوالي 18 فبراير 2026. ويُعلن رسمياً بعد رؤية الهلال.',
   },
 ];
 ---
@@ -50,7 +50,7 @@ const faqItems = [
   description={description}
   canonical="/ramadan"
   cityId="ramadan"
-  cityName="رمضان 2025"
+  cityName="رمضان 2026"
   schema={breadcrumbSchema}
 >
   <div class="max-w-5xl mx-auto px-4 py-6">
@@ -58,7 +58,7 @@ const faqItems = [
     <!-- Hero -->
     <div class="bg-gradient-to-br from-primary-800 to-primary-600 text-white rounded-2xl p-6 mb-6 text-center">
       <div class="text-4xl mb-2">🌙</div>
-      <h1 class="text-2xl md:text-3xl font-bold mb-2">مواقيت الصلاة في رمضان 2025</h1>
+      <h1 class="text-2xl md:text-3xl font-bold mb-2">مواقيت الصلاة في رمضان 2026</h1>
       <p class="text-primary-200 text-sm">الإمارات العربية المتحدة · جدول كامل للسحور والإفطار</p>
     </div>
 
@@ -103,8 +103,8 @@ const faqItems = [
         <!-- Ramadan schedule table -->
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           <div class="bg-primary-600 text-white px-5 py-4">
-            <h2 class="font-bold text-lg">جدول مواقيت رمضان 2025 — دبي</h2>
-            <p class="text-primary-200 text-sm mt-1">شهر مارس 2025 (موعد رمضان التقريبي)</p>
+            <h2 class="font-bold text-lg">جدول مواقيت رمضان 2026 — دبي</h2>
+            <p class="text-primary-200 text-sm mt-1">شهر فبراير 2026 (موعد رمضان التقريبي)</p>
           </div>
           <div class="overflow-x-auto">
             <table class="w-full text-sm">
@@ -121,7 +121,7 @@ const faqItems = [
               <tbody>
                 {ramadanSchedule.map(row => (
                   <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                    <td class="py-2 px-3 text-center text-xs text-gray-600">{row.day} مارس</td>
+                    <td class="py-2 px-3 text-center text-xs text-gray-600">{row.day} فبراير</td>
                     <td class="py-2 px-3 text-center font-mono text-xs text-indigo-700 font-semibold">{row.fajr}</td>
                     <td class="py-2 px-3 text-center font-mono text-xs text-gray-600">{row.dhuhr}</td>
                     <td class="py-2 px-3 text-center font-mono text-xs text-gray-600">{row.asr}</td>
