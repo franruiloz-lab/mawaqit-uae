@@ -18,7 +18,7 @@ const articleSchema = {
   dateModified: publishDate,
   author: { '@type': 'Organization', name: 'timeofpray.net' },
   publisher: { '@type': 'Organization', name: 'timeofpray.net', url: 'https://timeofpray.net' },
-  url: 'https://timeofpray.net/blog/salat-al-jumua',
+  url: 'https://timeofpray.net/blog/salat-al-jumua/',
 };
 
 const breadcrumbSchema = {
@@ -26,8 +26,8 @@ const breadcrumbSchema = {
   '@type': 'BreadcrumbList',
   itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: import.meta.env.SITE },
-    { '@type': 'ListItem', position: 2, name: 'المقالات', item: `${import.meta.env.SITE}/blog` },
-    { '@type': 'ListItem', position: 3, name: 'صلاة الجمعة', item: `${import.meta.env.SITE}/blog/salat-al-jumua` },
+    { '@type': 'ListItem', position: 2, name: 'المقالات', item: `${import.meta.env.SITE}/blog/` },
+    { '@type': 'ListItem', position: 3, name: 'صلاة الجمعة', item: `${import.meta.env.SITE}/blog/salat-al-jumua/` },
   ],
 };
 

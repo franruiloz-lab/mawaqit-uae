@@ -12,24 +12,24 @@ export const GET: APIRoute = () => {
   const today = new Date().toISOString().split('T')[0];
 
   const staticPages = [
-    { url: '/',        priority: '1.0', changefreq: 'daily'   },
-    { url: '/maghrib', priority: '0.9', changefreq: 'daily'   },
-    { url: '/ramadan', priority: '0.8', changefreq: 'weekly'  },
-    { url: '/blog',    priority: '0.7', changefreq: 'weekly'  },
-    { url: '/blog/salat-al-jumua',                priority: '0.7', changefreq: 'monthly' },
-    { url: '/blog/arkan-al-salah',                priority: '0.7', changefreq: 'monthly' },
-    { url: '/blog/salat-al-fajr',                 priority: '0.7', changefreq: 'monthly' },
-    { url: '/blog/salat-al-dhuhr',                priority: '0.7', changefreq: 'monthly' },
-    { url: '/blog/salat-al-isha',                 priority: '0.7', changefreq: 'monthly' },
-    { url: '/blog/turuq-hisab-awqat-al-salah',   priority: '0.6', changefreq: 'monthly' },
-    { url: '/blog/awqat-al-salah-wal-fusul',      priority: '0.6', changefreq: 'monthly' },
-    { url: '/about',   priority: '0.5', changefreq: 'monthly' },
-    { url: '/privacy', priority: '0.5', changefreq: 'monthly' },
-    { url: '/terms',   priority: '0.5', changefreq: 'monthly' },
+    { url: '/',         priority: '1.0', changefreq: 'daily'   },
+    { url: '/maghrib/', priority: '0.9', changefreq: 'daily'   },
+    { url: '/ramadan/', priority: '0.8', changefreq: 'weekly'  },
+    { url: '/blog/',    priority: '0.7', changefreq: 'weekly'  },
+    { url: '/blog/salat-al-jumua/',               priority: '0.7', changefreq: 'monthly' },
+    { url: '/blog/arkan-al-salah/',               priority: '0.7', changefreq: 'monthly' },
+    { url: '/blog/salat-al-fajr/',                priority: '0.7', changefreq: 'monthly' },
+    { url: '/blog/salat-al-dhuhr/',               priority: '0.7', changefreq: 'monthly' },
+    { url: '/blog/salat-al-isha/',                priority: '0.7', changefreq: 'monthly' },
+    { url: '/blog/turuq-hisab-awqat-al-salah/',  priority: '0.6', changefreq: 'monthly' },
+    { url: '/blog/awqat-al-salah-wal-fusul/',     priority: '0.6', changefreq: 'monthly' },
+    { url: '/about/',   priority: '0.5', changefreq: 'monthly' },
+    { url: '/privacy/', priority: '0.5', changefreq: 'monthly' },
+    { url: '/terms/',   priority: '0.5', changefreq: 'monthly' },
   ];
 
   const cityPages = cities.map(c => ({
-    url: `/${c.id}`,
+    url: `/${c.id}/`,
     priority: c.volume > 5000 ? '0.9' : '0.8',
     changefreq: 'daily',
   }));

@@ -189,7 +189,7 @@ const websiteSchema = {
             if (d < minDist) { minDist = d; nearest = c; }
           }
           // Use BASE_URL so it works on GitHub Pages
-          window.location.href = import.meta.env.BASE_URL + nearest.id;
+          window.location.href = import.meta.env.BASE_URL + nearest.id + '/';
         },
         () => {
           if (prompt) prompt.innerHTML = '<span class="text-red-600">⚠️ لم نتمكن من تحديد موقعك. اختر مدينتك من القائمة.</span>';
