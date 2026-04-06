@@ -1,0 +1,65 @@
+---
+import { u } from '../utils/url';
+---
+
+<div
+  id="cookie-banner"
+  class="fixed bottom-0 left-0 right-0 z-50 bg-white border-t-2 shadow-lg"
+  style="border-top-color: #097233; display: none;"
+  role="region"
+  aria-label="Cookie consent"
+>
+  <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+    <!-- Text -->
+    <p class="text-sm text-gray-700 flex-1 leading-relaxed">
+      We use cookies to improve your experience on this site.
+      <a
+        href={u('cookie-policy')}
+        class="underline font-medium"
+        style="color: #097233;"
+      >Cookie Policy</a>.
+    </p>
+
+    <!-- Buttons -->
+    <div class="flex gap-2 flex-shrink-0">
+      <button
+        id="cookie-accept"
+        type="button"
+        class="px-4 py-2 rounded-md text-sm font-semibold text-white transition-opacity hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2"
+        style="background-color: #097233; focus-ring-color: #097233;"
+      >
+        Accept
+      </button>
+      <button
+        id="cookie-decline"
+        type="button"
+        class="px-4 py-2 rounded-md text-sm font-semibold border-2 bg-white text-gray-700 transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2"
+        style="border-color: #097233; color: #097233;"
+      >
+        Decline
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const banner = document.getElementById('cookie-banner');
+    if (!banner) return;
+
+    const consent = localStorage.getItem('cookie_consent');
+    if (!consent) {
+      banner.style.display = 'block';
+    }
+
+    document.getElementById('cookie-accept')?.addEventListener('click', () => {
+      localStorage.setItem('cookie_consent', 'accepted');
+      banner.style.display = 'none';
+    });
+
+    document.getElementById('cookie-decline')?.addEventListener('click', () => {
+      localStorage.setItem('cookie_consent', 'rejected');
+      banner.style.display = 'none';
+    });
+  })();
+</script>
