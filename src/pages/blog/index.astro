@@ -5,9 +5,37 @@ import { u } from '../../utils/url';
 
 const title = 'مقالات إسلامية — مواقيت الصلاة والفقه الإسلامي | timeofpray.net';
 const description = 'مقالات متخصصة في أوقات الصلاة الخمس، أركانها، فضائلها، وكيفية حسابها في الإمارات. محتوى ديني موثوق ومبسط.';
+
+const siteBase = import.meta.env.SITE.replace(/\/$/, '');
+
+const breadcrumbSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'الرئيسية', item: `${siteBase}/` },
+    { '@type': 'ListItem', position: 2, name: 'المقالات', item: `${siteBase}/blog/` },
+  ],
+};
+
+const collectionSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: 'مقالات إسلامية — مواقيت الصلاة والفقه الإسلامي',
+  description,
+  url: `${siteBase}/blog/`,
+  inLanguage: 'ar',
+  hasPart: blogPosts.map(post => ({
+    '@type': 'Article',
+    headline: post.titleAr,
+    description: post.excerpt,
+    url: `${siteBase}/blog/${post.slug}/`,
+    datePublished: post.publishDate,
+    inLanguage: 'ar',
+  })),
+};
 ---
 
-<Base title={title} description={description} canonical="/blog" cityName="المقالات">
+<Base title={title} description={description} canonical="/blog" cityName="المقالات" schema={[breadcrumbSchema, collectionSchema]}>
   <div class="max-w-5xl mx-auto px-4 py-8">
 
     <div class="mb-8">
